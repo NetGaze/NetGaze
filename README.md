@@ -17,11 +17,12 @@ To use NetWatch in your Next.js application, follow these steps:
 1. Add the NetWatch dependency to your project:
 
 ```xml
-   <dependency>
-     <groupId>io.github.amithkoujalgi</groupId>
-     <artifactId>netwatch</artifactId>
-     <version>1.0.0</version>
-   </dependency>
+
+<dependency>
+   <groupId>io.github.amithkoujalgi</groupId>
+   <artifactId>netwatch</artifactId>
+   <version>1.0.0</version>
+</dependency>
 ```
 
 
