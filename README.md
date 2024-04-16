@@ -1,6 +1,7 @@
 # NetWatch
 
-NetWatch is a library/agent designed for server-side network observability for microservices. It provides real-time monitoring and visualization of network connectivity, enabling you to identify and address issues proactively.
+NetWatch is a library/agent designed for server-side network observability for microservices. It provides real-time
+monitoring and visualization of network connectivity, enabling you to identify and address issues proactively.
 
 ## Features
 
@@ -19,21 +20,23 @@ To use NetWatch in your Next.js application, follow these steps:
 ```xml
 
 <dependency>
-   <groupId>io.github.amithkoujalgi</groupId>
-   <artifactId>netwatch</artifactId>
-   <version>1.0.0</version>
+    <groupId>io.github.amithkoujalgi</groupId>
+    <artifactId>netwatch</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
-
 
 Memory updated
 Here's a suggested README file for your NetWatch library/agent:
 
 markdown
 Copy code
+
 # NetWatch
 
-NetWatch is a Java-based library/agent designed for server-side network observability in Next.js applications. It provides real-time monitoring and visualization of network connectivity, enabling you to identify and address issues proactively.
+NetWatch is a Java-based library/agent designed for server-side network observability in Next.js applications. It
+provides real-time monitoring and visualization of network connectivity, enabling you to identify and address issues
+proactively.
 
 ## Features
 
@@ -49,13 +52,15 @@ To use NetWatch in your Next.js application, follow these steps:
 
 1. Add the NetWatch dependency to your project:
 
-   ```xml
-   <dependency>
-     <groupId>com.example</groupId>
-     <artifactId>netwatch</artifactId>
-     <version>1.0.0</version>
-   </dependency>
-   
+```xml
+
+<dependency>
+    <groupId>com.example</groupId>
+    <artifactId>netwatch</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 Configure NetWatch in your Spring Boot application:
 
 ```
@@ -68,10 +73,36 @@ public class NetWatchConfig {
 }
 ```
 
+### Case 1: Using it in Java App
+
+Added as lib in Java and configured to connect to a few services (database, another Java app, REST API, etc).
+The lib does a reachability check to all the services, collects the data and reports to the master.
+
+```mermaid
+flowchart LR
+    cfg["Config"]
+    lib["NetWatch"]
+    lib -. reachability check .-> Svc1
+    lib -. reachability check .-> Svc2
+    lib -. Report to .-> Master
+    subgraph app["Java App"]
+        lib
+    end
+    cfg --> lib
+```
+
+### Case 2: Using it as a standalone agent
+
+The agent does a reachability check to all the configured services, collects the data and reports to the master.
+
 ## Usage
-Once NetWatch is integrated into your application, it will automatically post heartbeat messages to notify the status of your machine and application. 
+
+Once NetWatch is integrated into your application, it will automatically post heartbeat messages to notify the status of
+your machine and application.
 You can visualize this data using the NetWatch dashboard to identify any failure points or network connectivity issues.
 
 ## Contributing
-Contributions to NetWatch are welcome! If you have any ideas for new features, improvements, or bug fixes, please open an issue or submit a pull request on GitHub.
+
+Contributions to NetWatch are welcome! If you have any ideas for new features, improvements, or bug fixes, please open
+an issue or submit a pull request on GitHub.
 
