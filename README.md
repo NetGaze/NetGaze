@@ -95,6 +95,20 @@ flowchart LR
 
 The agent does a reachability check to all the configured services, collects the data and reports to the master.
 
+### Build
+
+```shell
+mvn clean install
+```
+
+### Run the NetWatch Server
+
+```shell
+java -jar netwatch-server.jar --spring.config.location=/path/to/config.yaml
+```
+
+The server's UI is accessible at http://localhost:8099
+
 ## Usage
 
 Once NetWatch is integrated into your application, it will automatically post heartbeat messages to notify the status of

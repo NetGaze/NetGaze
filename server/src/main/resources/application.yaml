@@ -1,0 +1,16 @@
+logging:
+  level:
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+  file:
+    name: ${spring.application.home:.}/logs/${spring.application.name}.log
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+server:
+  port: 8099
+spring:
+  application:
+    name: netwatch-server
+springdoc:
+  swagger-ui:
+    path: /docs
+    tryItOutEnabled: true

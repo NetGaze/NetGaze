@@ -1,0 +1,74 @@
+2024-04-18T09:22:49.740+05:30  INFO [netwatch-server,,] 43946 --- [main] i.g.a.netwatch.ServerApplication         : Starting ServerApplication v1.0-SNAPSHOT using Java 20.0.2 with PID 43946 (/Users/amithkoujalgi/Documents/GitHub/NetWatch/server/target/netwatch-server-1.0-SNAPSHOT.jar started by amithkoujalgi in /Users/amithkoujalgi/Documents/GitHub/NetWatch)
+2024-04-18T09:22:49.753+05:30  INFO [netwatch-server,,] 43946 --- [main] i.g.a.netwatch.ServerApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-04-18T09:22:51.097+05:30  INFO [netwatch-server,,] 43946 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8099 (http)
+2024-04-18T09:22:51.224+05:30  INFO [netwatch-server,,] 43946 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1390 ms
+2024-04-18T09:22:51.576+05:30  WARN [netwatch-server,,] 43946 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerAdapter' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Post-processing of merged bean definition failed
+2024-04-18T09:25:37.369+05:30  INFO [netwatch-server,,] 44570 --- [main] i.g.a.netwatch.ServerApplication         : Starting ServerApplication v1.0-SNAPSHOT using Java 20.0.2 with PID 44570 (/Users/amithkoujalgi/Documents/GitHub/NetWatch/server/target/netwatch-server-1.0-SNAPSHOT.jar started by amithkoujalgi in /Users/amithkoujalgi/Documents/GitHub/NetWatch)
+2024-04-18T09:25:37.372+05:30  INFO [netwatch-server,,] 44570 --- [main] i.g.a.netwatch.ServerApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-04-18T09:25:38.709+05:30  INFO [netwatch-server,,] 44570 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8099 (http)
+2024-04-18T09:25:38.724+05:30  INFO [netwatch-server,,] 44570 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-04-18T09:25:38.725+05:30  INFO [netwatch-server,,] 44570 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2024-04-18T09:25:38.832+05:30  INFO [netwatch-server,,] 44570 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-04-18T09:25:38.833+05:30  INFO [netwatch-server,,] 44570 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1383 ms
+2024-04-18T09:25:39.175+05:30  WARN [netwatch-server,,] 44570 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration: 'org.springframework.web.method.HandlerMethod org.springframework.web.method.HandlerMethod.createWithValidateFlags()'
+2024-04-18T09:25:39.179+05:30  INFO [netwatch-server,,] 44570 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-04-18T09:25:39.204+05:30  INFO [netwatch-server,,] 44570 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-04-18T09:25:39.237+05:30 ERROR [netwatch-server,,] 44570 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:639)
+
+The following method did not exist:
+
+    'org.springframework.web.method.HandlerMethod org.springframework.web.method.HandlerMethod.createWithValidateFlags()'
+
+The calling method's class, org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry, was loaded from the following location:
+
+    jar:file:/Users/amithkoujalgi/Documents/GitHub/NetWatch/server/target/netwatch-server-1.0-SNAPSHOT.jar!/BOOT-INF/lib/spring-webmvc-6.1.6.jar!/org/springframework/web/servlet/handler/AbstractHandlerMethodMapping$MappingRegistry.class
+
+The called method's class, org.springframework.web.method.HandlerMethod, is available from the following locations:
+
+    jar:file:/Users/amithkoujalgi/Documents/GitHub/NetWatch/server/target/netwatch-server-1.0-SNAPSHOT.jar!/BOOT-INF/lib/spring-web-6.0.13.jar!/org/springframework/web/method/HandlerMethod.class
+
+The called method's class hierarchy was loaded from the following locations:
+
+    org.springframework.web.method.HandlerMethod: jar:file:/Users/amithkoujalgi/Documents/GitHub/NetWatch/server/target/netwatch-server-1.0-SNAPSHOT.jar!/BOOT-INF/lib/spring-web-6.0.13.jar!/
+
+
+Action:
+
+Correct the classpath of your application so that it contains compatible versions of the classes org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry and org.springframework.web.method.HandlerMethod
+
+2024-04-18T09:27:42.971+05:30  INFO [netwatch-server,,] 44719 --- [main] i.g.a.netwatch.ServerApplication         : Starting ServerApplication v1.0-SNAPSHOT using Java 20.0.2 with PID 44719 (/Users/amithkoujalgi/Documents/GitHub/NetWatch/server/target/netwatch-server-1.0-SNAPSHOT.jar started by amithkoujalgi in /Users/amithkoujalgi/Documents/GitHub/NetWatch)
+2024-04-18T09:27:42.973+05:30  INFO [netwatch-server,,] 44719 --- [main] i.g.a.netwatch.ServerApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-04-18T09:27:44.279+05:30  INFO [netwatch-server,,] 44719 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8099 (http)
+2024-04-18T09:27:44.293+05:30  INFO [netwatch-server,,] 44719 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-04-18T09:27:44.293+05:30  INFO [netwatch-server,,] 44719 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2024-04-18T09:27:44.401+05:30  INFO [netwatch-server,,] 44719 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-04-18T09:27:44.402+05:30  INFO [netwatch-server,,] 44719 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1352 ms
+2024-04-18T09:27:44.754+05:30  INFO [netwatch-server,,] 44719 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-04-18T09:27:44.895+05:30  WARN [netwatch-server,,] 44719 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-04-18T09:27:45.023+05:30  INFO [netwatch-server,,] 44719 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8099 (http) with context path ''
+2024-04-18T09:27:45.117+05:30  INFO [netwatch-server,,] 44719 --- [main] i.g.a.netwatch.ServerApplication         : Started ServerApplication in 2.704 seconds (process running for 3.484)
+2024-04-18T09:27:51.000+05:30  INFO [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-04-18T09:27:51.001+05:30  INFO [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-04-18T09:27:51.001+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2024-04-18T09:27:51.001+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2024-04-18T09:27:51.002+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2024-04-18T09:27:51.002+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4967af09
+2024-04-18T09:27:51.003+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@7bfd04f6
+2024-04-18T09:27:51.003+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-04-18T09:27:51.003+05:30  INFO [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-04-18T09:27:51.012+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/", parameters={}
+2024-04-18T09:27:51.034+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : "FORWARD" dispatch for GET "/index.html", parameters={}
+2024-04-18T09:27:51.051+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "FORWARD" dispatch, status 200
+2024-04-18T09:27:51.052+05:30 DEBUG [netwatch-server,,] 44719 --- [http-nio-8099-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK

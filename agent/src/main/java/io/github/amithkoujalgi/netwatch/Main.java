@@ -11,6 +11,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -18,12 +19,13 @@ public class Main {
         Agent agent = new Agent();
 
         Connection c = new Connection();
+        c.setName("C1");
         c.setHost("google.com");
         c.setPort(80);
         c.setType(ConnectionType.HTTP);
         agent.setConnections(Collections.singletonList(c));
 
-        agent.checkConnections();
+        agent.start();
         System.out.printf(String.valueOf(c.isActive()));
     }
 }
@@ -37,17 +39,24 @@ class Agent {
     @Setter
     private List<Connection> connections;
 
-    public void checkConnections() {
+    public void start() {
+        checkConnections();
+    }
+
+    private void checkConnections() {
         for (Connection connection : connections) {
             if (connection.getType().equals(ConnectionType.HTTP)) {
                 boolean status = checkHTTPConnection(String.format("http://%s:%d", connection.getHost(), connection.getPort()));
                 connection.setActive(status);
+                connection.setLastCheckedAt(new Date());
             } else if (connection.getType().equals(ConnectionType.HTTPS)) {
                 boolean status = checkHTTPSConnection(String.format("https://%s:%d", connection.getHost(), connection.getPort()));
                 connection.setActive(status);
+                connection.setLastCheckedAt(new Date());
             } else if (connection.getType().equals(ConnectionType.TCP)) {
                 boolean status = checkTCPConnection(connection.getHost(), connection.getPort());
                 connection.setActive(status);
+                connection.setLastCheckedAt(new Date());
             }
         }
     }
@@ -97,22 +106,17 @@ class Agent {
     }
 }
 
+@Setter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 class Connection {
-    @Setter
     private String name;
-    @Setter
     private ConnectionType type;
-    @Setter
     private String host;
-    @Setter
     private int port;
-    @Setter
     private boolean active;
-    @Setter
-    private Data lastCheckedAt;
+    private Date lastCheckedAt;
 }
 
 enum ConnectionType {
