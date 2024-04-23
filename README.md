@@ -43,10 +43,11 @@ The lib does a reachability check to all the services, collects the data and rep
 ```mermaid
 flowchart LR
     cfg["Config"]
-    lib["NetWatch"]
+    lib["NetWatch Agent"]
+    server["NetWatch Server"]
     lib -. reachability check .-> Svc1
     lib -. reachability check .-> Svc2
-    lib -. Report to .-> Master
+    lib -. Report to .-> server
     subgraph app["Java App"]
         lib
     end
