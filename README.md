@@ -9,6 +9,20 @@ proactively.
 
 **NOTE**: This project is a work in progress.
 
+```mermaid
+flowchart LR
+    cfg["Config"]
+    lib["NetWatch Agent"]
+    server["NetWatch Server"]
+    lib -. reachability check .-> Svc1
+    lib -. reachability check .-> Svc2
+    lib -. Report to .-> server
+    subgraph app["Java App"]
+        lib
+    end
+    cfg --> lib
+```
+
 ## Features
 
 - Standalone service for machine status notification
@@ -39,20 +53,6 @@ After running the above command, NetWatch server's UI is accessible at http://lo
 Added as lib in Java and configured to connect to a few services (database, another Java app, REST
 API, etc).
 The lib does a reachability check to all the services, collects the data and reports to the master.
-
-```mermaid
-flowchart LR
-    cfg["Config"]
-    lib["NetWatch Agent"]
-    server["NetWatch Server"]
-    lib -. reachability check .-> Svc1
-    lib -. reachability check .-> Svc2
-    lib -. Report to .-> server
-    subgraph app["Java App"]
-        lib
-    end
-    cfg --> lib
-```
 
 To use NetWatch in your Java application, follow these steps:
 
