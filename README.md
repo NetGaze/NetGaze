@@ -54,7 +54,17 @@ java -jar netwatch-server.jar --spring.config.location=/path/to/config.yaml
 Refer to the
 sample [config.yaml](https://github.com/amithkoujalgi/NetWatch/blob/main/server/src/main/resources/application.yaml).
 
-After running the above command, NetWatch server's UI is accessible at http://localhost:8080
+After running the above command:
+
+- NetWatch server's UI is accessible at http://localhost:8080 (when default config.yaml is used.).
+- NetWatch server's REST API playground is accessible at http://localhost:8080/docs (when default config.yaml is used).
+- NetWatch server's event listener would be started on port 8990 (when default config.yaml is used).
+
+Verify if the event listener port is accessible.
+
+```shell
+telnet localhost 8990
+```
 
 ### Client
 
