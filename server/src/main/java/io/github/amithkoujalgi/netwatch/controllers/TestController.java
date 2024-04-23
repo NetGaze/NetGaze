@@ -1,4 +1,4 @@
-package io.github.amithkoujalgi.netwatch;
+package io.github.amithkoujalgi.netwatch.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

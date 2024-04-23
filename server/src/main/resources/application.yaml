@@ -4,9 +4,9 @@ logging:
   file:
     name: ${spring.application.home:.}/logs/${spring.application.name}.log
   pattern:
-    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+    level: '%5p [${spring.application.name:}]'
 server:
-  port: 8099
+  port: 8080
 spring:
   application:
     name: netwatch-server
@@ -14,3 +14,6 @@ springdoc:
   swagger-ui:
     path: /docs
     tryItOutEnabled: true
+netwatch:
+  event-listener:
+    port: 8990
