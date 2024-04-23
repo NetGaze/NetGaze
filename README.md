@@ -106,7 +106,7 @@ public class Main {
 The agent does a reachability check to all the configured services, collects the data and reports to
 the master.
 
-**This is TBD**
+**This capability is TBD.**
 
 ### Build
 
