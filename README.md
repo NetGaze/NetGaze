@@ -1,6 +1,6 @@
 # NetWatch
 
-![Java](https://img.shields.io/badge/Java-11_+-green.svg?style=just-the-message&labelColor=gray)
+![Java](https://img.shields.io/badge/Java-17_+-green.svg?style=just-the-message&labelColor=gray)
 
 NetWatch is a Java-based library/agent designed for server-side network observability for
 microservices. It provides real-time
@@ -19,7 +19,7 @@ flowchart LR
     svc2["Your Service 2"]
     lib -. reachability check .-> svc1
     lib -. reachability check .-> svc2
-    lib -. Report to .-> listener
+    lib -. Reports to .-> listener
 
     subgraph app["Your Java App"]
         lib
