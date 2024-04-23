@@ -31,10 +31,14 @@ jobs:
 
       - name: Get tag name
         id: get-tag
-        run: echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml -Drevision=${{ steps.vars.outputs.tag }}
+        run: mvn -B package --file pom.xml -Drevision=$RELEASE_VERSION
 
       - name: Publish to GitHub Packages Apache Maven
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
