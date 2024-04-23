@@ -6,10 +6,6 @@ name: Maven Package
 on:
   release:
     types: [created]
-#on:
-#  # Runs on pushes targeting the default branch
-#  push:
-#    branches: [ "main" ]
 
 jobs:
   build:
@@ -28,14 +24,6 @@ jobs:
           distribution: 'temurin'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
-
-#      - name: Get tag name
-#        id: get-tag
-#        run: echo "RELEASE_VERSION=$GITHUB_REF_NAME" >> $GITHUB_ENV
-
-      - name: Test
-        run: |
-          echo ${{ github.ref_name }}
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml -Drevision=${{ github.ref_name }}
