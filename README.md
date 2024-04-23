@@ -71,9 +71,9 @@ To use NetWatch in your Java application, follow these steps:
 ```xml
 
 <dependency>
-  <groupId>io.github.amithkoujalgi</groupId>
-  <artifactId>netwatch-agent</artifactId>
-  <version>1.0.0</version>
+    <groupId>io.github.amithkoujalgi</groupId>
+    <artifactId>netwatch-agent</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -81,22 +81,23 @@ To use NetWatch in your Java application, follow these steps:
 
 ```java
 import io.github.amithkoujalgi.netwatch.client.NetWatchAgent;
+
 import java.util.Collections;
 
 public class Main {
 
-  public static void main(String[] args) throws InterruptedException {
-    Connection c = new Connection();
-    c.setName("C1");
-    c.setHost("google.com");
-    c.setPort(80);
-    c.setType(ConnectionType.HTTP);
+    public static void main(String[] args) throws InterruptedException {
+        Connection c = new Connection();
+        c.setName("C1");
+        c.setHost("google.com");
+        c.setPort(80);
+        c.setType(ConnectionType.HTTP);
 
-    NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8990);
-    netWatchAgent.setConnections(Collections.singletonList(c));
-    netWatchAgent.start();
-    netWatchAgent.join();
-  }
+        NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8990);
+        netWatchAgent.setConnections(Collections.singletonList(c));
+        netWatchAgent.start();
+        netWatchAgent.join();
+    }
 }
 ```
 
@@ -104,6 +105,8 @@ public class Main {
 
 The agent does a reachability check to all the configured services, collects the data and reports to
 the master.
+
+**This is TBD**
 
 ### Build
 
