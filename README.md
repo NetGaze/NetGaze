@@ -15,8 +15,8 @@ proactively.
 flowchart LR
     cfg["Config"]
     lib["NetWatch Agent"]
-    svc1["Service 1"]
-    svc2["Service 2"]
+    svc1["Your Service 1"]
+    svc2["Your Service 2"]
     lib -. reachability check .-> svc1
     lib -. reachability check .-> svc2
     lib -. Report to .-> listener
