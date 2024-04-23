@@ -9,17 +9,27 @@ proactively.
 
 **NOTE**: This project is a work in progress.
 
+## Design
+
 ```mermaid
 flowchart LR
     cfg["Config"]
     lib["NetWatch Agent"]
-    server["NetWatch Server"]
-    lib -. reachability check .-> Svc1
-    lib -. reachability check .-> Svc2
-    lib -. Report to .-> server
-    subgraph app["Java App"]
+    svc1["Service 1"]
+    svc2["Service 2"]
+    lib -. reachability check .-> svc1
+    lib -. reachability check .-> svc2
+    lib -. Report to .-> listener
+
+    subgraph app["Your Java App"]
         lib
     end
+    subgraph server["NetWatch Server"]
+        ui["UI Server"]
+        rest["REST API"]
+        listener["Event Listener"]
+    end
+
     cfg --> lib
 ```
 
