@@ -1,5 +1,6 @@
 package io.github.amithkoujalgi.netwatch.client;
 
+import io.github.amithkoujalgi.netwatch.Agent;
 import io.github.amithkoujalgi.netwatch.Connection;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -10,21 +11,21 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Setter
+@SuppressWarnings("VulnerableCodeUsages")
 @AllArgsConstructor
 @NoArgsConstructor
 public class NetWatchAgent extends Thread {
 
-  private String agentName;
-  private List<Connection> connections;
   private String serverHost;
   private int serverPort;
+  private Agent agent;
 
-  public NetWatchAgent(String serverHost, int serverPort) {
+  public NetWatchAgent(String serverHost, int serverPort, String agentName,
+      List<Connection> connections) {
     this.serverPort = serverPort;
     this.serverHost = serverHost;
+    this.agent = new Agent(agentName, connections);
   }
 
   public void run() {
@@ -34,7 +35,7 @@ public class NetWatchAgent extends Thread {
           .handler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) {
-              ch.pipeline().addLast(new EventHandler(agentName, connections));
+              ch.pipeline().addLast(new EventHandler(agent));
             }
           });
       ChannelFuture future = bootstrap.connect(serverHost, serverPort).sync();

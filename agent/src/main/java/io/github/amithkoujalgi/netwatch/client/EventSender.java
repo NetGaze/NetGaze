@@ -2,6 +2,7 @@ package io.github.amithkoujalgi.netwatch.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.amithkoujalgi.netwatch.Agent;
 import io.github.amithkoujalgi.netwatch.Connection;
 import io.github.amithkoujalgi.netwatch.ConnectionType;
 import io.netty.buffer.ByteBuf;
@@ -14,7 +15,6 @@ import java.net.Socket;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -23,13 +23,11 @@ public class EventSender implements Runnable {
 
   private final ObjectMapper objectMapper = new ObjectMapper();
 
-  private final String agentName;
-  private final List<Connection> connections;
   private final ChannelHandlerContext ctx;
+  private Agent agent;
 
-  public EventSender(String agentName, List<Connection> connections, ChannelHandlerContext ctx) {
-    this.connections = connections;
-    this.agentName = agentName;
+  public EventSender(Agent agent, ChannelHandlerContext ctx) {
+    this.agent = agent;
     this.ctx = ctx;
   }
 
@@ -38,7 +36,7 @@ public class EventSender implements Runnable {
     while (true) {
       gather();
       try {
-        String msg = objectMapper.writeValueAsString(connections);
+        String msg = objectMapper.writeValueAsString(agent);
         log.info("Sending event to server...");
         ctx.writeAndFlush(getMessage(msg));
         Thread.sleep(1000);
@@ -53,7 +51,7 @@ public class EventSender implements Runnable {
   }
 
   private void gather() {
-    for (Connection connection : connections) {
+    for (Connection connection : this.agent.getConnections()) {
       if (connection.getType().equals(ConnectionType.HTTP)) {
         boolean status = checkHTTPConnection(
             String.format("http://%s:%d", connection.getHost(), connection.getPort()));

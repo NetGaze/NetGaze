@@ -1,28 +1,25 @@
 package io.github.amithkoujalgi.netwatch.client;
 
-import io.github.amithkoujalgi.netwatch.Connection;
+import io.github.amithkoujalgi.netwatch.Agent;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SuppressWarnings("CallToPrintStackTrace")
 public class EventHandler extends ChannelInboundHandlerAdapter {
 
-  private final String agentName;
-  private final List<Connection> connections;
+  private final Agent agent;
 
-  public EventHandler(String agentName, List<Connection> connections) {
-    this.connections = connections;
-    this.agentName = agentName;
+  public EventHandler(Agent agent) {
+    this.agent = agent;
   }
 
   @Override
   public void channelActive(ChannelHandlerContext ctx) {
-    new Thread(new EventSender(agentName, connections, ctx)).start();
+    new Thread(new EventSender(agent, ctx)).start();
   }
 
   @Override
