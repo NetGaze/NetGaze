@@ -2,17 +2,46 @@ package io.github.amithkoujalgi.netwatch.eventlistener;
 
 
 import lombok.Getter;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Getter
-@Component
-@Scope("singleton")
-public class AgentRegister {
+public final class AgentRegister {
 
-  private int count = 0;
+    private static AgentRegister INSTANCE;
 
-  public void incrementCount() {
-    count++;
-  }
+    private final List<Agent> agents = new CopyOnWriteArrayList<>();
+
+    private AgentRegister() {
+    }
+
+    public static AgentRegister getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new AgentRegister();
+        }
+        return INSTANCE;
+    }
+
+    public void updateAgent(Agent agent) {
+        boolean found = false;
+        for (Agent a : agents) {
+            if (a.getName().equals(agent.getName())) {
+                a.setConnections(agent.getConnections());
+                found = true;
+            }
+        }
+        if (!found) {
+            agents.add(agent);
+        }
+    }
+
+    public List<Connection> getConnections(String agent) throws Exception {
+        for (Agent a : agents) {
+            if (a.getName().equals(agent)) {
+                return a.getConnections();
+            }
+        }
+        throw new Exception("Agent not found!");
+    }
 }
