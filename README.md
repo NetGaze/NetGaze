@@ -83,7 +83,7 @@ To use NetWatch in your Java application, follow these steps:
 <dependency>
     <groupId>io.github.amithkoujalgi</groupId>
     <artifactId>netwatch-agent</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1</version>
 </dependency>
 ```
 
