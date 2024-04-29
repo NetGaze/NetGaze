@@ -87,7 +87,7 @@ To use NetWatch in your Java application, follow these steps:
 </dependency>
 ```
 
-For installing and using the dependency, refer to [this](#usage) setup. process.
+For installing and using the dependency from Github Maven packages repository, refer to [this](#usage) setup. process.
 
 2. Configure NetWatch in your Java application:
 
