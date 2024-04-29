@@ -76,7 +76,7 @@ The lib does a reachability check to all the services, collects the data and rep
 
 To use NetWatch in your Java application, follow these steps:
 
-1. Add the NetWatch Agent dependency to your project:
+1. Add the NetWatch Agent dependency to your project's `pom.xml`:
 
 ```xml
 
@@ -87,7 +87,42 @@ To use NetWatch in your Java application, follow these steps:
 </dependency>
 ```
 
-For installing and using the dependency from Github Maven packages repository, refer to [this](#usage) setup process.
+Add repository to your project's `pom.xml`:
+
+```xml
+
+<repositories>
+    <repository>
+        <id>github</id>
+        <name>GitHub Apache Maven Packages</name>
+        <url>https://maven.pkg.github.com/amithkoujalgi/NetWatch</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+```
+
+Add server to `settings.xml`. (Usually available at `~/.m2/settings.xml`)
+
+```xml
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+        <server>
+            <id>github</id>
+            <username>your-github-username</username>
+            <password>your-github-token</password>
+        </server>
+    </servers>
+</settings>
+```
 
 2. Configure NetWatch in your Java application:
 
@@ -133,43 +168,6 @@ notify the status of
 your machine and application.
 You can visualize this data using the NetWatch dashboard to identify any failure points or network
 connectivity issues.
-
-Add repository to your `pom.xml`:
-
-```xml
-
-<repositories>
-    <repository>
-        <id>github</id>
-        <name>GitHub Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/amithkoujalgi/NetWatch</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
-</repositories>
-```
-
-Add server to `settings.xml`
-
-```xml
-
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <servers>
-        <server>
-            <id>github</id>
-            <username>your-github-username</username>
-            <password>your-github-token</password>
-        </server>
-    </servers>
-</settings>
-```
 
 ## Contributing
 
