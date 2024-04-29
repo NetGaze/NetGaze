@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>netwatch-server</artifactId>
-    <version>${revision}</version>
+    <version>netwatch-revision</version>
     <description>An real-time network observability platform designed for microservices architectures,
         providing
         real-time monitoring and visualization of network connectivity. It enables identification of
