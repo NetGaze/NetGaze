@@ -87,6 +87,8 @@ To use NetWatch in your Java application, follow these steps:
 </dependency>
 ```
 
+For installing and using the dependency, refer to [this](#usage) setup. process.
+
 2. Configure NetWatch in your Java application:
 
 ```java
@@ -131,6 +133,43 @@ notify the status of
 your machine and application.
 You can visualize this data using the NetWatch dashboard to identify any failure points or network
 connectivity issues.
+
+Add repository to your `pom.xml`:
+
+```xml
+
+<repositories>
+    <repository>
+        <id>github</id>
+        <name>GitHub Apache Maven Packages</name>
+        <url>https://maven.pkg.github.com/amithkoujalgi/NetWatch</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+```
+
+Add server to `settings.xml`
+
+```xml
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+        <server>
+            <id>github</id>
+            <username>your-github-username</username>
+            <password>your-github-token</password>
+        </server>
+    </servers>
+</settings>
+```
 
 ## Contributing
 
