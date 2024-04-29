@@ -17,7 +17,7 @@
     <groupId>io.github.amithkoujalgi</groupId>
     <artifactId>netwatch</artifactId>
     <relativePath>../pom.xml</relativePath>
-    <version>${revision}</version>
+    <version>netwatch-revision</version>
   </parent>
 
   <properties>
