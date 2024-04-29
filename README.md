@@ -161,8 +161,6 @@ the master.
 mvn clean install
 ```
 
-## Usage
-
 Once NetWatch is integrated into your application, it will automatically post heartbeat messages to
 notify the status of
 your machine and application.
