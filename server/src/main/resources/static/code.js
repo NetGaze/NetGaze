@@ -9,7 +9,8 @@ function render(graphData) {
                     'shape': 'rectangle',
                     'content': 'data(id)',
                     'text-valign': 'center',
-                    'text-halign': 'center'
+                    'text-halign': 'center',
+                    'background-color': 'gray'
                 }
             },
             {
@@ -42,6 +43,20 @@ function render(graphData) {
             name: 'circle',
             padding: 5
         }
+    });
+    cy.on('mouseover', 'node', function(evt){
+      var node = evt.target;
+      console.log( node.id() );
+      evt.target.style({
+          'background-color': 'yellow'
+        });
+    });
+    cy.on('mouseout', 'node', function(evt){
+      var node = evt.target;
+      console.log( node.id() );
+      evt.target.style({
+          'background-color': 'gray'
+        });
     });
 }
 

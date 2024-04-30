@@ -62,11 +62,13 @@ public final class AgentRegister {
     for (Agent a : AgentRegister.getInstance().getAgents()) {
       graphNodes.add(
           new GraphNode(new GraphNodeData(a.getHost(), null), new GraphNodePosition(0, 0)));
-      for (Connection c : a.getConnections()) {
-        graphNodes.add(
-            new GraphNode(new GraphNodeData(c.getHost(), null), new GraphNodePosition(0, 0)));
-        graphEdges.add(new GraphEdge(
-            new GraphEdgeData(UUID.randomUUID().toString(), a.getHost(), c.getHost())));
+      if (a.getConnections() != null) {
+        for (Connection c : a.getConnections()) {
+          graphNodes.add(
+              new GraphNode(new GraphNodeData(c.getHost(), null), new GraphNodePosition(0, 0)));
+          graphEdges.add(new GraphEdge(
+              new GraphEdgeData(UUID.randomUUID().toString(), a.getHost(), c.getHost())));
+        }
       }
     }
 
