@@ -1,6 +1,6 @@
-package io.github.amithkoujalgi.netwatch.eventlistener;
+package io.github.amithkoujalgi.netwatch;
 
-import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +10,9 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Connection {
+public class Agent {
 
   private String name;
-  private String type;
   private String host;
-  private int port;
-  private boolean active;
-  private Date lastCheckedAt;
+  private List<Connection> connections;
 }

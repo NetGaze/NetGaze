@@ -89,6 +89,7 @@
     </dependencyManagement>
 
     <modules>
+        <module>commons</module>
         <module>server</module>
         <module>agent</module>
     </modules>

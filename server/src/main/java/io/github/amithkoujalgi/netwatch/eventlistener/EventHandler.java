@@ -2,6 +2,7 @@ package io.github.amithkoujalgi.netwatch.eventlistener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.amithkoujalgi.netwatch.Agent;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

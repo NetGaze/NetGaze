@@ -21,11 +21,11 @@ public class NetWatchAgent extends Thread {
   private int serverPort;
   private Agent agent;
 
-  public NetWatchAgent(String serverHost, int serverPort, String agentName,
+  public NetWatchAgent(String serverHost, int serverPort, String agentName, String agentHost,
       List<Connection> connections) {
     this.serverPort = serverPort;
     this.serverHost = serverHost;
-    this.agent = new Agent(agentName, connections);
+    this.agent = new Agent(agentName, agentHost, connections);
   }
 
   public void run() {

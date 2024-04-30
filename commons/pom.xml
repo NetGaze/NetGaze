@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>netwatch-agent</artifactId>
+  <artifactId>netwatch-commons</artifactId>
   <version>netwatch-revision</version>
   <description>An real-time network observability platform designed for microservices architectures,
     providing
@@ -27,11 +27,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>io.github.amithkoujalgi</groupId>
-      <artifactId>netwatch-commons</artifactId>
-      <version>netwatch-revision</version>
-    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

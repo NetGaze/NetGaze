@@ -11,7 +11,7 @@ public class Main {
     c.setHost("google.com");
     c.setPort(80);
     c.setType(ConnectionType.HTTP);
-    NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8990, "Agent1",
+    NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8990, "Agent1", "0.1.2.3",
         Collections.singletonList(c));
     netWatchAgent.start();
     netWatchAgent.join();
