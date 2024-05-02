@@ -10,7 +10,11 @@ import io.github.amithkoujalgi.netwatch.models.graph.GraphNode;
 import io.github.amithkoujalgi.netwatch.models.graph.GraphNodeData;
 import io.github.amithkoujalgi.netwatch.models.graph.GraphNodePosition;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.Getter;
@@ -33,6 +37,16 @@ public final class AgentRegister {
   }
 
   public void updateAgent(Agent agent) {
+    if (agent.getLastSeenAt() == null) {
+      agent.setLastSeenAt(new Date());
+    }
+    if (agent.getConnections() != null) {
+      for (Connection c : agent.getConnections()) {
+        if (c.getLastCheckedAt() == null) {
+          c.setLastCheckedAt(new Date());
+        }
+      }
+    }
     boolean found = false;
     for (Agent a : agents) {
       if (a.getName().equals(agent.getName())) {
@@ -60,12 +74,30 @@ public final class AgentRegister {
     List<GraphEdge> graphEdges = new ArrayList<>();
 
     for (Agent a : AgentRegister.getInstance().getAgents()) {
+      Map<String, Object> agentProps = new HashMap<>();
+      agentProps.put("lastSeenAt", a.getLastSeenAt().toString());
+//      agentProps.put("active", new Random().nextBoolean());
       graphNodes.add(
-          new GraphNode(new GraphNodeData(a.getHost(), null), new GraphNodePosition(0, 0)));
+          new GraphNode(
+              new GraphNodeData(a.getHost(), null),
+              new GraphNodePosition(0, 0),
+              agentProps,
+              (new Random().nextBoolean() ? "node-active" : "node-inactive") + " agent"
+          )
+      );
       if (a.getConnections() != null) {
         for (Connection c : a.getConnections()) {
+          Map<String, Object> connProps = new HashMap<>();
+          connProps.put("lastCheckedAt", c.getLastCheckedAt().toString());
+//          connProps.put("active", new Random().nextBoolean());
           graphNodes.add(
-              new GraphNode(new GraphNodeData(c.getHost(), null), new GraphNodePosition(0, 0)));
+              new GraphNode(
+                  new GraphNodeData(c.getHost(), null),
+                  new GraphNodePosition(0, 0),
+                  connProps,
+                  (new Random().nextBoolean() ? "node-active" : "node-inactive") + " connection"
+              )
+          );
           graphEdges.add(new GraphEdge(
               new GraphEdgeData(UUID.randomUUID().toString(), a.getHost(), c.getHost())));
         }

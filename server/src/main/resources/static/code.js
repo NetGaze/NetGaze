@@ -36,7 +36,31 @@ function render(graphData) {
                     'curve-style': 'bezier',
                     'target-arrow-shape': 'triangle'
                 }
-            }
+            },
+            {
+                selector: '.node-active',
+                css: {
+                    'background-color': 'green'
+                }
+            },
+            {
+                selector: '.node-inactive',
+                css: {
+                    'background-color': 'red'
+                }
+            },
+            {
+                  selector: '.agent',
+                  css: {
+                     'shape': 'rectangle',
+                  }
+              },
+              {
+                  selector: '.connection',
+                  css: {
+                     'shape': 'ellipse',
+                  }
+              }
         ],
         elements: graphData,
         layout: {
@@ -44,6 +68,7 @@ function render(graphData) {
             padding: 5
         }
     });
+    cy.nodes().map(x => console.log(x));
     cy.on('mouseover', 'node', function(evt){
       var node = evt.target;
       console.log( node.id() );

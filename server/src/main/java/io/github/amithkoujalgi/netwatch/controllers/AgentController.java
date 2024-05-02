@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -74,33 +75,36 @@ public class AgentController {
   @GetMapping("/graph")
   public Graph getGraph() {
 
-
-
     Agent agent1 = new Agent();
     agent1.setName("agent1");
     agent1.setHost("192.168.0.1");
+    agent1.setLastSeenAt(new Date());
 
     Connection c1 = new Connection();
     c1.setName("C1");
     c1.setHost("192.168.0.3");
     c1.setPort(80);
     c1.setType(ConnectionType.HTTP);
+//    c1.setLastCheckedAt(new Date());
 
     Connection c2 = new Connection();
     c2.setName("C2");
     c2.setHost("192.168.0.4");
     c2.setPort(80);
     c2.setType(ConnectionType.HTTP);
+//    c2.setLastCheckedAt(new Date());
 
     Agent agent2 = new Agent();
     agent2.setName("agent2");
     agent2.setHost("192.168.0.2");
+    agent2.setLastSeenAt(new Date());
 
     Connection c3 = new Connection();
     c3.setName("C3");
     c3.setHost("192.168.0.5");
     c3.setPort(80);
     c3.setType(ConnectionType.HTTP);
+//    c3.setLastCheckedAt(new Date());
 
     agent1.setConnections(Arrays.asList(c1, c2));
     agent2.setConnections(List.of(c3));

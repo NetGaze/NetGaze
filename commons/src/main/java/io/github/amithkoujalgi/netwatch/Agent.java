@@ -1,5 +1,6 @@
 package io.github.amithkoujalgi.netwatch;
 
+import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,5 +15,6 @@ public class Agent {
 
   private String name;
   private String host;
+  private Date lastSeenAt;
   private List<Connection> connections;
 }

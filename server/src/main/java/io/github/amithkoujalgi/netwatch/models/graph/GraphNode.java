@@ -1,5 +1,7 @@
 package io.github.amithkoujalgi.netwatch.models.graph;
 
+import java.util.HashMap;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -15,4 +17,6 @@ public class GraphNode {
 
   private GraphNodeData data;
   private GraphNodePosition position;
+  private Map<String, Object> additionalProperties = new HashMap<>();
+  private String classes;
 }
