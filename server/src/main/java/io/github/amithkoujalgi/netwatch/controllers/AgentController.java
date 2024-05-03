@@ -3,7 +3,7 @@ package io.github.amithkoujalgi.netwatch.controllers;
 import io.github.amithkoujalgi.netwatch.Agent;
 import io.github.amithkoujalgi.netwatch.Connection;
 import io.github.amithkoujalgi.netwatch.ConnectionType;
-import io.github.amithkoujalgi.netwatch.eventlistener.AgentRegister;
+import io.github.amithkoujalgi.netwatch.core.AgentRegister;
 import io.github.amithkoujalgi.netwatch.models.graph.Graph;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

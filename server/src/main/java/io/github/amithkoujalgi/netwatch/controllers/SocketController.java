@@ -2,7 +2,7 @@ package io.github.amithkoujalgi.netwatch.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.amithkoujalgi.netwatch.Agent;
-import io.github.amithkoujalgi.netwatch.eventlistener.AgentRegister;
+import io.github.amithkoujalgi.netwatch.core.AgentRegister;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;

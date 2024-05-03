@@ -1,4 +1,4 @@
-package io.github.amithkoujalgi.netwatch.eventlistener;
+package io.github.amithkoujalgi.netwatch.core;
 
 
 import io.github.amithkoujalgi.netwatch.Agent;
