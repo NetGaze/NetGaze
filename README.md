@@ -158,6 +158,8 @@ public class Main {
                 "/path/to/agent-config.yaml"
         );
         
+        // this starts NetWatch agent in the background
+        
         netWatchAgent.start();
         
         netWatchAgent.join();
