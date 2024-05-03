@@ -152,8 +152,14 @@ import java.util.Collections;
 public class Main {
 
     public static void main(String[] args) {
-        NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8080, "/path/to/agent-config.yaml");
+        NetWatchAgent netWatchAgent = new NetWatchAgent(
+                "localhost",
+                8080,
+                "/path/to/agent-config.yaml"
+        );
+        
         netWatchAgent.start();
+        
         netWatchAgent.join();
     }
 }
