@@ -109,8 +109,8 @@ public class AgentController {
     agent1.setConnections(Arrays.asList(c1, c2));
     agent2.setConnections(List.of(c3));
 
-    AgentRegister.getInstance().updateAgent(agent1);
-    AgentRegister.getInstance().updateAgent(agent2);
+//    AgentRegister.getInstance().updateAgent(agent1);
+//    AgentRegister.getInstance().updateAgent(agent2);
 
     return AgentRegister.getInstance().getGraph();
   }

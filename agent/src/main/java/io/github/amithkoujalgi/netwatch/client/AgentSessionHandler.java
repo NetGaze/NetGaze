@@ -1,8 +1,6 @@
 package io.github.amithkoujalgi.netwatch.client;
 
-import io.github.amithkoujalgi.netwatch.Ack;
 import io.github.amithkoujalgi.netwatch.Agent;
-import java.lang.reflect.Type;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.stomp.StompCommand;
@@ -14,64 +12,49 @@ import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 @Slf4j
 public class AgentSessionHandler extends StompSessionHandlerAdapter {
 
-  private final Agent agent;
+    private final Agent agent;
 
-  private boolean disconnected = false;
+    private boolean disconnected = false;
 
-  public AgentSessionHandler(Agent agent) {
-    this.agent = agent;
-  }
+    public AgentSessionHandler(Agent agent) {
+        this.agent = agent;
+    }
 
-  @Override
-  public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
-    String topic = "/topic/ack";
-    log.info("New session established: " + session.getSessionId());
-    session.subscribe(topic, this);
-    log.info("Subscribed to " + topic);
-    new Thread(() -> {
-      while (!disconnected) {
-        try {
-          session.send("/app/event-listener", agent);
-          log.info("Message sent to websocket server");
-        } catch (IllegalStateException e) {
-          log.info("Error: " + e.getMessage());
-          break;
-        }
-        try {
-          Thread.sleep(1000);
-        } catch (InterruptedException e) {
-          throw new RuntimeException(e);
-        }
-      }
-      log.error("Terminated thread.");
-    }).start();
-  }
-
-
-  @Override
-  public void handleException(StompSession session, StompCommand command, StompHeaders headers,
-      byte[] payload, Throwable exception) {
-    log.error(exception.getMessage());
-  }
+    @Override
+    public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
+        log.info("New session established: " + session.getSessionId());
+        Collector collector = new Collector(agent);
+        new Thread(() -> {
+            while (!disconnected) {
+                try {
+                    collector.gather();
+                    session.send("/app/event-listener", agent);
+                    log.info("Published event to server");
+                } catch (IllegalStateException e) {
+                    log.info("Error: " + e.getMessage());
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            log.error("Terminated publisher.");
+        }).start();
+    }
 
 
-  @Override
-  public Type getPayloadType(StompHeaders headers) {
-    return Ack.class;
-  }
+    @Override
+    public void handleException(StompSession session, StompCommand command, StompHeaders headers,
+                                byte[] payload, Throwable exception) {
+        log.error(exception.getMessage());
+    }
 
 
-  @Override
-  public void handleFrame(StompHeaders headers, Object payload) {
-    Ack msg = (Ack) payload;
-    log.info("Received from server: " + msg.getMessage());
-  }
-
-
-  @Override
-  public void handleTransportError(StompSession session, Throwable exception) {
-    log.error("Disconnected Transport error: " + exception.getMessage());
-    // Handle disconnection here, e.g., reconnect or close resources.
-    disconnected = true;
-  }
+    @Override
+    public void handleTransportError(StompSession session, Throwable exception) {
+        log.error("Transport error: " + exception.getMessage());
+        disconnected = true;
+    }
 }
