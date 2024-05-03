@@ -58,7 +58,8 @@ After running the above command:
 
 - NetWatch server's UI is accessible at http://localhost:8080 (when default config.yaml is used.).
 - NetWatch server's REST API playground is accessible at http://localhost:8080/docs (when default config.yaml is used).
-- NetWatch server's event listener would be started on port 8990 (when default config.yaml is used).
+- NetWatch server's event listener (socket server) would be started on the same web port for the stomp clients to
+  connect at `ws://localhost:8080/netwatch-agent-event-listener`
 
 Verify if the event listener port is accessible.
 
@@ -157,11 +158,11 @@ public class Main {
                 8080,
                 "/path/to/agent-config.yaml"
         );
-        
+
         // this starts NetWatch agent in the background
-        
+
         netWatchAgent.start();
-        
+
         netWatchAgent.join();
     }
 }
