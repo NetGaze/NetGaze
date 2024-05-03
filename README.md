@@ -142,7 +142,7 @@ connections:
     port: 80
 ```
 
-5. Configure NetWatch in your Java application:
+5. Configure NetWatch Agent in your Java application:
 
 ```java
 import io.github.amithkoujalgi.netwatch.client.NetWatchAgent;
@@ -152,8 +152,7 @@ import java.util.Collections;
 public class Main {
 
     public static void main(String[] args) {
-        String agentConfigFile = "/path/to/agent-config.yaml";
-        NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8080, agentConfigFile);
+        NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8080, "/path/to/agent-config.yaml");
         netWatchAgent.start();
         netWatchAgent.join();
     }
