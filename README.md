@@ -133,18 +133,17 @@ import java.util.Collections;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
-        Connection c = new Connection();
-        c.setName("C1");
-        c.setHost("google.com");
-        c.setPort(80);
-        c.setType(ConnectionType.HTTP);
+  public static void main(String[] args) {
+    Connection c = new Connection();
+    c.setName("C1");
+    c.setHost("google.com");
+    c.setPort(80);
+    c.setType(ConnectionType.HTTP);
 
-        NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8990);
-        netWatchAgent.setConnections(Collections.singletonList(c));
-        netWatchAgent.start();
-        netWatchAgent.join();
-    }
+    NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8990);
+    netWatchAgent.start();
+    netWatchAgent.join();
+  }
 }
 ```
 
