@@ -18,7 +18,7 @@ public class StompClient {
       if (t.isAlive()) {
         continue;
       } else {
-        System.out.println("Reconnecting...");
+        System.out.println("Attempting to reconnect...");
         t = getNotifierThread();
         t.start();
       }
