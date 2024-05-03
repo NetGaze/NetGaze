@@ -124,7 +124,7 @@ To use NetWatch in your Java application, follow these steps:
 </settings>
 ```
 
-4. Create your config file:
+4. Create your config file `agent-config.yaml`:
 
 ```
 name: Test Agent
