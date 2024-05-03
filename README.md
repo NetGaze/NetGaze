@@ -126,7 +126,7 @@ To use NetWatch in your Java application, follow these steps:
 
 4. Create your config file `agent-config.yaml`:
 
-```
+```yaml
 name: Test Agent
 host: 192.188.10.1
 connections:
