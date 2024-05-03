@@ -134,12 +134,6 @@ import java.util.Collections;
 public class Main {
 
     public static void main(String[] args) {
-        Connection c = new Connection();
-        c.setName("C1");
-        c.setHost("google.com");
-        c.setPort(80);
-        c.setType(ConnectionType.HTTP);
-
         String agentConfigFile = "/path/to/agent-config.yaml";
         NetWatchAgent netWatchAgent = new NetWatchAgent("localhost", 8080, agentConfigFile);
         netWatchAgent.start();
