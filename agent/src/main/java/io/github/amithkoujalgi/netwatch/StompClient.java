@@ -26,8 +26,9 @@ public class StompClient {
     }
 }
 
+@SuppressWarnings("NullableProblems")
 class MyStompSessionHandler extends StompSessionHandlerAdapter {
-    @SuppressWarnings("NullableProblems")
+
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
         String topic = "/topic/ack";
@@ -53,37 +54,32 @@ class MyStompSessionHandler extends StompSessionHandlerAdapter {
         }).start();
     }
 
-    @SuppressWarnings("NullableProblems")
+
     @Override
     public void handleException(StompSession session, StompCommand command, StompHeaders headers, byte[] payload, Throwable exception) {
         System.out.println(exception.getMessage());
     }
 
-    @SuppressWarnings("NullableProblems")
+
     @Override
     public Type getPayloadType(StompHeaders headers) {
         return Ack.class;
     }
 
-    @SuppressWarnings("NullableProblems")
+
     @Override
     public void handleFrame(StompHeaders headers, Object payload) {
         Ack msg = (Ack) payload;
         System.out.println("Received from server: " + msg.getMessage());
     }
 
-    @SuppressWarnings("NullableProblems")
+
     @Override
     public void handleTransportError(StompSession session, Throwable exception) {
         System.out.println("Disconnected Transport error: " + exception.getMessage());
         // Handle disconnection here, e.g., reconnect or close resources.
     }
 
-    /**
-     * A sample message instance.
-     *
-     * @return instance of <code>Message</code>
-     */
     private Agent getSampleMessage() {
         Agent msg = new Agent();
         msg.setHost("0.1.2.3");
