@@ -1,25 +1,30 @@
 package io.github.amithkoujalgi.netwatch;
 
 import io.github.amithkoujalgi.netwatch.client.AgentSessionHandler;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
 
-@SuppressWarnings("BusyWait")
-public class StompClient {
+@SuppressWarnings({"BusyWait", "InfiniteLoopStatement"})
+@Data
+@AllArgsConstructor
+public class NetWatchAgent extends Thread {
 
-  private static final String URL = "ws://localhost:8080/netwatch-agent-event-listener";
+  private String host;
+  private int port;
 
-  public static void main(String[] args) {
-    Thread t = getNotifierThread();
+  public void run() {
+    Thread t = getNotifierThread(host, port);
     t.start();
     while (true) {
       if (t.isAlive()) {
         continue;
       } else {
         System.out.println("Attempting to reconnect...");
-        t = getNotifierThread();
+        t = getNotifierThread(host, port);
         t.start();
       }
       try {
@@ -30,13 +35,14 @@ public class StompClient {
     }
   }
 
-  public static Thread getNotifierThread() {
+  private Thread getNotifierThread(String host, int port) {
     return new Thread(() -> {
       WebSocketClient client = new StandardWebSocketClient();
       WebSocketStompClient stompClient = new WebSocketStompClient(client);
       stompClient.setMessageConverter(new MappingJackson2MessageConverter());
       AgentSessionHandler sessionHandler = new AgentSessionHandler();
-      stompClient.connectAsync(URL, sessionHandler);
+      stompClient.connectAsync(
+          String.format("ws://%s:%s/netwatch-agent-event-listener", host, port), sessionHandler);
       while (true) {
         boolean disconnected = sessionHandler.isDisconnected();
         if (disconnected) {
