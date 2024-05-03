@@ -87,7 +87,7 @@ To use NetWatch in your Java application, follow these steps:
 </dependency>
 ```
 
-Add repository to your project's `pom.xml`:
+2. Add repository to your project's `pom.xml`:
 
 ```xml
 
@@ -106,7 +106,7 @@ Add repository to your project's `pom.xml`:
 </repositories>
 ```
 
-Add server to `settings.xml`. (Usually available at `~/.m2/settings.xml`)
+3. Add server to `settings.xml`. (Usually available at `~/.m2/settings.xml`)
 
 ```xml
 
@@ -124,7 +124,25 @@ Add server to `settings.xml`. (Usually available at `~/.m2/settings.xml`)
 </settings>
 ```
 
-2. Configure NetWatch in your Java application:
+4. Create your config file:
+
+```
+name: Test Agent
+host: 192.188.10.1
+connections:
+  - name: Google
+    description: Connection to Google
+    type: HTTP
+    host: google.com
+    port: 80
+  - name: Facebook
+    description: Connection to Facebook
+    type: HTTP
+    host: facebook.com
+    port: 80
+```
+
+5. Configure NetWatch in your Java application:
 
 ```java
 import io.github.amithkoujalgi.netwatch.client.NetWatchAgent;
