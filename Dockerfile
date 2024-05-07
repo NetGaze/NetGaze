@@ -6,6 +6,6 @@ WORKDIR /app
 
 RUN cd /app && mvn clean install
 
-RUN mv /app/sample-agent-config.yaml /app/config.yaml
+RUN cp /app/server/src/main/resources/application.yaml /app/config.yaml
 
 CMD ["java", "-jar", "/app/server/target/netwatch-server-netwatch-revision.jar", "--spring.config.location=/app/config.yaml"]

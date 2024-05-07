@@ -55,9 +55,22 @@ java \
 
 #### Run as a Docker container
 
+##### Using default config
+
 ```shell
 docker run \
   -p 8080:8080 \
+  ghcr.io/amithkoujalgi/netwatch:0.0.1
+```
+
+##### Use an external config file
+
+Use
+
+```shell
+docker run \
+  -p 8080:8080 \
+  -v /path/to/your/config.yaml:/app/config.yaml
   ghcr.io/amithkoujalgi/netwatch:0.0.1
 ```
 
