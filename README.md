@@ -55,7 +55,7 @@ java \
 
 #### Run as a Docker container
 
-```
+```shell
 docker run \
   -p 8080:8080 \
   ghcr.io/amithkoujalgi/netwatch:0.0.1
