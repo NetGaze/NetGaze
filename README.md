@@ -51,6 +51,12 @@ flowchart LR
 java -jar netwatch-server.jar --spring.config.location=/path/to/config.yaml
 ```
 
+#### Run as a Docker container
+
+```
+docker run -p 8080:8080 -d netwatch:1.0
+```
+
 Refer to the
 sample [config.yaml](https://github.com/amithkoujalgi/NetWatch/blob/main/server/src/main/resources/application.yaml).
 
@@ -193,7 +199,7 @@ connectivity issues.
 - [ ] Threaded connection watcher - `io.github.amithkoujalgi.netwatch.client.Collector`
 - [ ] Docker container for NetWatch server
 - [ ] UI improvements
-
+- [ ] Docs setup with Docusaurus
 
 ## Contributing
 
