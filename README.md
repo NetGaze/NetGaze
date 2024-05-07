@@ -48,7 +48,9 @@ flowchart LR
 #### Run the NetWatch Server
 
 ```shell
-java -jar netwatch-server.jar --spring.config.location=/path/to/config.yaml
+java \
+  -jar netwatch-server.jar \
+  --spring.config.location=/path/to/config.yaml
 ```
 
 #### Run as a Docker container
