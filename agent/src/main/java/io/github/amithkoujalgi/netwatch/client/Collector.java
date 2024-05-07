@@ -45,6 +45,7 @@ public class Collector {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
+            connection.setConnectTimeout(5000);
             int responseCode = connection.getResponseCode();
             boolean result = responseCode == HttpURLConnection.HTTP_OK;
             log.info(
@@ -62,6 +63,7 @@ public class Collector {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
+            connection.setConnectTimeout(5000);
             int responseCode = connection.getResponseCode();
             boolean result = responseCode == HttpURLConnection.HTTP_OK;
             log.info(

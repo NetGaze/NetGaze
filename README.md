@@ -187,6 +187,12 @@ your machine and application.
 You can visualize this data using the NetWatch dashboard to identify any failure points or network
 connectivity issues.
 
+## Todo
+
+- [ ] Python agent
+- [ ] Threaded connection watcher - `io.github.amithkoujalgi.netwatch.client.Collector`
+- [ ] Docker container for NetWatch server
+
 ## Contributing
 
 Contributions to NetWatch are welcome! If you have any ideas for new features, improvements, or bug
