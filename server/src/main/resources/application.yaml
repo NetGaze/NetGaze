@@ -14,6 +14,3 @@ springdoc:
   swagger-ui:
     path: /docs
     tryItOutEnabled: true
-netwatch:
-  event-listener:
-    port: 8990
