@@ -192,6 +192,8 @@ connectivity issues.
 - [ ] Python agent
 - [ ] Threaded connection watcher - `io.github.amithkoujalgi.netwatch.client.Collector`
 - [ ] Docker container for NetWatch server
+- [ ] UI improvements
+
 
 ## Contributing
 
