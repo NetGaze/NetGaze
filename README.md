@@ -54,7 +54,9 @@ java -jar netwatch-server.jar --spring.config.location=/path/to/config.yaml
 #### Run as a Docker container
 
 ```
-docker run -p 8080:8080 -d netwatch:1.0
+docker run \
+  -p 8080:8080 \
+  ghcr.io/amithkoujalgi/netwatch:0.0.1
 ```
 
 Refer to the
