@@ -36,7 +36,19 @@
             <url>https://maven.pkg.github.com/amithkoujalgi/NetWatch</url>
         </repository>
     </distributionManagement>
-
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/amithkoujalgi/ollama4j</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <dependencyManagement>
         <dependencies>
             <dependency>
