@@ -52,22 +52,3 @@ VALUES (1, 1),
        (1, 2),
        (2, 3),
        (2, 4);
-
-select name::text         as id,
-       'agent'            as title,
-       concat(host)       as mainstat,
-       ''                 as secondarystat,
-       'orange'           as color,
-       'up'               as detail__status,
-       last_seen_at::text as detail__last_seen_at
-from agents
-union
-select concat(host::text, ':', port::text)                       as id,
-       'target node'                                             as title,
-       concat(host::text, ':', port::text)                       as mainstat,
-       concat(connection_type::text)                             as secondarystat,
-       case when active then 'green' else 'red' end              as color,
-       case when active then 'connected' else 'disconnected' end as detail__status,
-       last_checked_at::text                                     as detail__last_seen_at
-from connections
-;
