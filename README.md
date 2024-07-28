@@ -1,5 +1,9 @@
 # NetGaze
 
+<p align="center">
+<img width="100px" src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/logo.jpeg" alt=""/>
+</p>
+
 ![Java](https://img.shields.io/badge/Java-17_+-green.svg?style=just-the-message&labelColor=gray)
 
 NetGaze is a Java-based library/agent designed for server-side network observability for
