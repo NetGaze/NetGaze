@@ -214,9 +214,15 @@ your machine and application.
 You can visualize this data using the NetGaze dashboard to identify any failure points or network
 connectivity issues.
 
-### Viz
+### Visualize
 
 Visualize in Grafana
+
+http://localhost:3000/dashboards
+
+<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/dash.png" alt="">
+
+<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/conn-preview.png" alt="">
 
 ## Todo
 
