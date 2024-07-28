@@ -214,6 +214,10 @@ your machine and application.
 You can visualize this data using the NetGaze dashboard to identify any failure points or network
 connectivity issues.
 
+### Viz
+
+Visualize in Grafana
+
 ## Todo
 
 - [ ] Python agent
