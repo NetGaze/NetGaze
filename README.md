@@ -1,8 +1,8 @@
-# NetWatch
+# NetGaze
 
 ![Java](https://img.shields.io/badge/Java-17_+-green.svg?style=just-the-message&labelColor=gray)
 
-NetWatch is a Java-based library/agent designed for server-side network observability for
+NetGaze is a Java-based library/agent designed for server-side network observability for
 microservices. It provides real-time
 monitoring and visualization of network connectivity, enabling you to identify and address issues
 proactively.
@@ -14,7 +14,7 @@ proactively.
 ```mermaid
 flowchart LR
     cfg["Config"]
-    lib["NetWatch Agent"]
+    lib["NetGaze Agent"]
     svc1["Your Service 1"]
     svc2["Your Service 2"]
     lib -. reachability check .-> svc1
@@ -24,7 +24,7 @@ flowchart LR
     subgraph app["Your Java App"]
         lib
     end
-    subgraph server["NetWatch Server"]
+    subgraph server["NetGaze Server"]
         ui["UI Server"]
         rest["REST API"]
         listener["Event Listener"]
@@ -45,11 +45,11 @@ flowchart LR
 
 ### Server
 
-#### Run the NetWatch Server
+#### Run the NetGaze Server
 
 ```shell
 java \
-  -jar netwatch-server.jar \
+  -jar netgaze-server.jar \
   --spring.config.location=/path/to/config.yaml
 ```
 
@@ -60,7 +60,7 @@ java \
 ```shell
 docker run \
   -p 8080:8080 \
-  ghcr.io/amithkoujalgi/netwatch:0.0.1
+  ghcr.io/amithkoujalgi/netgaze:0.0.1
 ```
 
 ##### Use an external config file
@@ -71,18 +71,18 @@ Use
 docker run \
   -p 8080:8080 \
   -v /path/to/your/config.yaml:/app/config.yaml
-  ghcr.io/amithkoujalgi/netwatch:0.0.1
+  ghcr.io/amithkoujalgi/netgaze:0.0.1
 ```
 
 Refer to the
-sample [config.yaml](https://github.com/amithkoujalgi/NetWatch/blob/main/server/src/main/resources/application.yaml).
+sample [config.yaml](https://github.com/amithkoujalgi/NetGaze/blob/main/server/src/main/resources/application.yaml).
 
 After running the above command:
 
-- NetWatch server's UI is accessible at http://localhost:8080 (when default config.yaml is used.).
-- NetWatch server's REST API playground is accessible at http://localhost:8080/docs (when default config.yaml is used).
-- NetWatch server's event listener (socket server) would be started on the same web port for the stomp clients to
-  connect at `ws://localhost:8080/netwatch-agent-event-listener`
+- NetGaze server's UI is accessible at http://localhost:8080 (when default config.yaml is used.).
+- NetGaze server's REST API playground is accessible at http://localhost:8080/docs (when default config.yaml is used).
+- NetGaze server's event listener (socket server) would be started on the same web port for the stomp clients to
+  connect at `ws://localhost:8080/netgaze-agent-event-listener`
 
 Verify if the event listener port is accessible.
 
@@ -98,15 +98,15 @@ Added as lib in Java and configured to connect to a few services (database, anot
 API, etc).
 The lib does a reachability check to all the services, collects the data and reports to the master.
 
-To use NetWatch in your Java application, follow these steps:
+To use NetGaze in your Java application, follow these steps:
 
-1. Add the NetWatch Agent dependency to your project's `pom.xml`:
+1. Add the NetGaze Agent dependency to your project's `pom.xml`:
 
 ```xml
 
 <dependency>
     <groupId>io.github.amithkoujalgi</groupId>
-    <artifactId>netwatch-agent</artifactId>
+    <artifactId>netgaze-agent</artifactId>
     <version>0.0.1</version>
 </dependency>
 ```
@@ -119,7 +119,7 @@ To use NetWatch in your Java application, follow these steps:
     <repository>
         <id>github</id>
         <name>GitHub Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/amithkoujalgi/NetWatch</url>
+        <url>https://maven.pkg.github.com/amithkoujalgi/NetGaze</url>
         <releases>
             <enabled>true</enabled>
         </releases>
@@ -166,27 +166,27 @@ connections:
     port: 80
 ```
 
-5. Configure NetWatch Agent in your Java application:
+5. Configure NetGaze Agent in your Java application:
 
 ```java
-import io.github.amithkoujalgi.netwatch.client.NetWatchAgent;
+import io.github.amithkoujalgi.netgaze.client.NetGazeAgent;
 
 import java.util.Collections;
 
 public class Main {
 
     public static void main(String[] args) {
-        NetWatchAgent netWatchAgent = new NetWatchAgent(
+        NetGazeAgent netGazeAgent = new NetGazeAgent(
                 "localhost",
                 8080,
                 "/path/to/agent-config.yaml"
         );
 
-        // this starts NetWatch agent in the background
+        // this starts NetGaze agent in the background
 
-        netWatchAgent.start();
+        netGazeAgent.start();
 
-        netWatchAgent.join();
+        netGazeAgent.join();
     }
 }
 ```
@@ -204,23 +204,23 @@ the master.
 mvn clean install
 ```
 
-Once NetWatch is integrated into your application, it will automatically post heartbeat messages to
+Once NetGaze is integrated into your application, it will automatically post heartbeat messages to
 notify the status of
 your machine and application.
-You can visualize this data using the NetWatch dashboard to identify any failure points or network
+You can visualize this data using the NetGaze dashboard to identify any failure points or network
 connectivity issues.
 
 ## Todo
 
 - [ ] Python agent
-- [ ] Threaded connection watcher - `io.github.amithkoujalgi.netwatch.client.Collector`
-- [ ] Docker container for NetWatch server
+- [ ] Threaded connection watcher - `io.github.amithkoujalgi.netgaze.client.Collector`
+- [ ] Docker container for NetGaze server
 - [ ] UI improvements
 - [ ] Docs setup with Docusaurus
 
 ## Contributing
 
-Contributions to NetWatch are welcome! If you have any ideas for new features, improvements, or bug
+Contributions to NetGaze are welcome! If you have any ideas for new features, improvements, or bug
 fixes, please open
 an issue or submit a pull request on GitHub.
 
