@@ -4,8 +4,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>netwatch-commons</artifactId>
-  <version>netwatch-revision</version>
+  <artifactId>netgaze-commons</artifactId>
+  <version>netgaze-revision</version>
   <description>An real-time network observability platform designed for microservices architectures,
     providing
     real-time monitoring and visualization of network connectivity. It enables identification of
@@ -14,10 +14,10 @@
   </description>
 
   <parent>
-    <groupId>io.github.amithkoujalgi</groupId>
-    <artifactId>netwatch</artifactId>
+    <groupId>io.github.netgaze</groupId>
+    <artifactId>netgaze</artifactId>
     <relativePath>../pom.xml</relativePath>
-    <version>netwatch-revision</version>
+    <version>netgaze-revision</version>
   </parent>
 
   <properties>

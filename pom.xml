@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.amithkoujalgi</groupId>
-    <artifactId>netwatch</artifactId>
-    <version>netwatch-revision</version>
+    <groupId>io.github.netgaze</groupId>
+    <artifactId>netgaze</artifactId>
+    <version>netgaze-revision</version>
     <description>An real-time network observability platform designed for microservices architectures,
         providing
         real-time monitoring and visualization of network connectivity. It enables identification of
@@ -33,14 +33,14 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/amithkoujalgi/NetWatch</url>
+            <url>https://maven.pkg.github.com/NetGaze/NetGaze</url>
         </repository>
     </distributionManagement>
     <repositories>
         <repository>
             <id>github</id>
             <name>GitHub Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/amithkoujalgi/ollama4j</url>
+            <url>https://maven.pkg.github.com/NetGaze/NetGaze</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
