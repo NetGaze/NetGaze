@@ -7,7 +7,7 @@ public class SampleAgent {
         NetGazeAgent netGazeAgent = new NetGazeAgent(
                 "localhost",
                 8080,
-                "/Users/amithkoujalgi/Downloads/agent-config.yaml"
+                "/Users/amithkoujalgi/NetGaze/agent-config.yaml"
         );
 
         // this starts NetGaze agent in the background

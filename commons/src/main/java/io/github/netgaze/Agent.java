@@ -1,11 +1,13 @@
 package io.github.netgaze;
 
-import java.util.Date;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Setter
 @Data
@@ -16,5 +18,5 @@ public class Agent {
   private String name;
   private String host;
   private Date lastSeenAt;
-  private List<Connection> connections;
+  private List<Connection> connections = new ArrayList<>();
 }

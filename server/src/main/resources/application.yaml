@@ -12,6 +12,24 @@ application:
 spring:
   application:
     name: netgaze-server
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: root
+    password: root
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/netgaze
+    hikari:
+      minimumIdle: 5
+      maximumPoolSize: 5
+      idleTimeout: 30000
+      poolName: DataSourceServicePool
+      maxLifetime: 1800000
+      connectionTimeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
 springdoc:
   swagger-ui:
     path: /docs
