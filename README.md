@@ -17,24 +17,41 @@ proactively.
 
 ```mermaid
 flowchart LR
-    cfg["Config"]
-    lib["NetGaze Agent"]
-    svc1["Your Service 1"]
-    svc2["Your Service 2"]
-    lib -. reachability check .-> svc1
-    lib -. reachability check .-> svc2
-    lib -. Reports to .-> listener
+  db["Postgres DB"]
+  cfg1["Config"]
+  cfg2["Config"]
+  lib1["NetGaze Agent"]
+  lib2["Standalone NetGaze Agent"]
+  svc1["Your Service 1"]
+  svc2["Your Service 2"]
+  svc3["Your Service 3"]
+  svc4["Your Service 4"]
+  lib1 -. reachability check .-> svc1
+  lib1 -. reachability check .-> svc2
+  lib1 -- Reports to --> listener
+  lib2 -. reachability check .-> svc3
+  lib2 -. reachability check .-> svc4
+  lib2 -- Reports to --> listener
 
-    subgraph app["Your Java App"]
-        lib
-    end
-    subgraph server["NetGaze Server"]
-        ui["UI Server"]
-        rest["REST API"]
-        listener["Event Listener"]
-    end
+  subgraph app["Your Java App"]
+    lib1
+  end
+  subgraph sa_agent["Host/Instance"]
+    lib2
+    cfg2 --> lib2
+  end
+  subgraph server["NetGaze Server"]
+    rest["REST API"]
+    listener["Event Listener"]
+  end
 
-    cfg --> lib
+  subgraph grafana["Grafana"]
+    dash["NetGaze Dashboard"]
+  end
+
+  cfg1 --> lib1
+  server --> db
+  db -- Poll agents --> dash
 ```
 
 ## Features
