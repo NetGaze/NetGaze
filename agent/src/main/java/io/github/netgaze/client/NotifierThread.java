@@ -24,7 +24,7 @@ public class NotifierThread extends Thread {
     WebSocketStompClient stompClient = new WebSocketStompClient(client);
     stompClient.setMessageConverter(new MappingJackson2MessageConverter());
     AgentSessionHandler sessionHandler = new AgentSessionHandler(agent);
-    stompClient.connectAsync(String.format("ws://%s:%s/netwatch-agent-event-listener", host, port),
+    stompClient.connectAsync(String.format("ws://%s:%s/netgaze-agent-event-listener", host, port),
         sessionHandler);
     while (true) {
       boolean disconnected = sessionHandler.isDisconnected();

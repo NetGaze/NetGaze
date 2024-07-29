@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @AllArgsConstructor
 @Slf4j
-public class NetWatchAgent extends Thread {
+public class NetGazeAgent extends Thread {
 
   private String host;
   private int port;

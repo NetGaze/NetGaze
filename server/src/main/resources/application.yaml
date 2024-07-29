@@ -9,7 +9,7 @@ server:
   port: 8080
 spring:
   application:
-    name: netwatch-server
+    name: netgaze-server
 springdoc:
   swagger-ui:
     path: /docs

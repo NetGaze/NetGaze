@@ -2,7 +2,7 @@
 #
 # conn = stomp.Connection([('localhost', 8080)])
 # conn.connect(wait=True)
-# conn.send(body='{}', destination='/netwatch-agent-event-listener')
+# conn.send(body='{}', destination='/netgaze-agent-event-listener')
 # conn.disconnect()
 import json
 from random import random
@@ -11,7 +11,7 @@ import stomper
 import websocket
 from websocket import ABNF
 
-ws: websocket._core.WebSocket = websocket.create_connection("ws://localhost:8080/netwatch-agent-event-listener")
+ws: websocket._core.WebSocket = websocket.create_connection("ws://localhost:8080/netgaze-agent-event-listener")
 
 data = {
     "name": "Test Agent",
@@ -40,5 +40,5 @@ ws.send("CONNECT\naccept-version:1.0,1.1,2.0\n\n\x00\n")
 # ws.send(payload=json.dumps(data), opcode=ABNF.OPCODE_TEXT)
 # Subscribing to topic
 client_id = '999'
-sub = stomper.subscribe("/netwatch-agent-event-listener", client_id, ack='auto')
+sub = stomper.subscribe("/netgaze-agent-event-listener", client_id, ack='auto')
 ws.send(sub)

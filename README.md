@@ -64,7 +64,7 @@ java \
 ```shell
 docker run \
   -p 8080:8080 \
-  ghcr.io/amithkoujalgi/netgaze:0.0.1
+  ghcr.io/netgaze/netgaze:0.0.1
 ```
 
 ##### Use an external config file
@@ -75,11 +75,11 @@ Use
 docker run \
   -p 8080:8080 \
   -v /path/to/your/config.yaml:/app/config.yaml
-  ghcr.io/amithkoujalgi/netgaze:0.0.1
+  ghcr.io/netgaze/netgaze:0.0.1
 ```
 
 Refer to the
-sample [config.yaml](https://github.com/amithkoujalgi/NetGaze/blob/main/server/src/main/resources/application.yaml).
+sample [config.yaml](https://github.com/NetGaze/blob/main/server/src/main/resources/application.yaml).
 
 After running the above command:
 
@@ -109,7 +109,7 @@ To use NetGaze in your Java application, follow these steps:
 ```xml
 
 <dependency>
-    <groupId>io.github.amithkoujalgi</groupId>
+    <groupId>io.github.netgaze</groupId>
     <artifactId>netgaze-agent</artifactId>
     <version>0.0.1</version>
 </dependency>
@@ -123,7 +123,7 @@ To use NetGaze in your Java application, follow these steps:
     <repository>
         <id>github</id>
         <name>GitHub Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/amithkoujalgi/NetGaze</url>
+        <url>https://maven.pkg.github.com/NetGaze</url>
         <releases>
             <enabled>true</enabled>
         </releases>
@@ -173,7 +173,7 @@ connections:
 5. Configure NetGaze Agent in your Java application:
 
 ```java
-import io.github.amithkoujalgi.netgaze.client.NetGazeAgent;
+import io.github.netgaze.client.NetGazeAgent;
 
 import java.util.Collections;
 
@@ -227,7 +227,7 @@ http://localhost:3000/dashboards
 ## Todo
 
 - [ ] Python agent
-- [ ] Threaded connection watcher - `io.github.amithkoujalgi.netgaze.client.Collector`
+- [ ] Threaded connection watcher - `io.github.netgaze.client.Collector`
 - [ ] Docker container for NetGaze server
 - [ ] UI improvements
 - [ ] Docs setup with Docusaurus

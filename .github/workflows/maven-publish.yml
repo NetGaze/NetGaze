@@ -28,7 +28,7 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "netwatch-revision"
+          find: "netgaze-revision"
           replace: ${{ github.ref_name }}
           regex: false
 
