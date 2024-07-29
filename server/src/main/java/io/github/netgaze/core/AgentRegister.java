@@ -1,9 +1,9 @@
-package io.github.amithkoujalgi.netwatch.core;
+package io.github.netgaze.core;
 
 
-import io.github.amithkoujalgi.netwatch.Agent;
-import io.github.amithkoujalgi.netwatch.Connection;
-import io.github.amithkoujalgi.netwatch.models.graph.*;
+import io.github.netgaze.Agent;
+import io.github.netgaze.Connection;
+import io.github.netgaze.models.graph.*;
 import lombok.Getter;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package io.github.amithkoujalgi.netwatch;
+package io.github.netgaze;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

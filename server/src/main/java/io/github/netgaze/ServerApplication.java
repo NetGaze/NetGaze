@@ -1,4 +1,4 @@
-package io.github.amithkoujalgi.netwatch;
+package io.github.netgaze;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;

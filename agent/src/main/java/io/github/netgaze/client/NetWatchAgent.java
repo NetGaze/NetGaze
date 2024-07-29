@@ -1,8 +1,8 @@
-package io.github.amithkoujalgi.netwatch.client;
+package io.github.netgaze.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import io.github.amithkoujalgi.netwatch.Agent;
+import io.github.netgaze.Agent;
 import java.io.File;
 import java.io.IOException;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
-package io.github.amithkoujalgi.netwatch.client;
+package io.github.netgaze.client;
 
-import io.github.amithkoujalgi.netwatch.Agent;
-import io.github.amithkoujalgi.netwatch.Connection;
-import io.github.amithkoujalgi.netwatch.ConnectionType;
+import io.github.netgaze.Agent;
+import io.github.netgaze.Connection;
+import io.github.netgaze.ConnectionType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

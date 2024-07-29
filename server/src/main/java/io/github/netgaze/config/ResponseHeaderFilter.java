@@ -1,4 +1,4 @@
-package io.github.amithkoujalgi.netwatch.config;
+package io.github.netgaze.config;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;

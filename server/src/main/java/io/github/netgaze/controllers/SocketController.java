@@ -1,8 +1,8 @@
-package io.github.amithkoujalgi.netwatch.controllers;
+package io.github.netgaze.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.amithkoujalgi.netwatch.Agent;
-import io.github.amithkoujalgi.netwatch.core.AgentRegister;
+import io.github.netgaze.Agent;
+import io.github.netgaze.core.AgentRegister;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;

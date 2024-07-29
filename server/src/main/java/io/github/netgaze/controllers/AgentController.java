@@ -1,10 +1,10 @@
-package io.github.amithkoujalgi.netwatch.controllers;
+package io.github.netgaze.controllers;
 
-import io.github.amithkoujalgi.netwatch.Agent;
-import io.github.amithkoujalgi.netwatch.Connection;
-import io.github.amithkoujalgi.netwatch.ConnectionType;
-import io.github.amithkoujalgi.netwatch.core.AgentRegister;
-import io.github.amithkoujalgi.netwatch.models.graph.Graph;
+import io.github.netgaze.Agent;
+import io.github.netgaze.Connection;
+import io.github.netgaze.ConnectionType;
+import io.github.netgaze.core.AgentRegister;
+import io.github.netgaze.models.graph.Graph;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,9 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j

@@ -1,6 +1,6 @@
-package io.github.amithkoujalgi.netwatch.client;
+package io.github.netgaze.client;
 
-import io.github.amithkoujalgi.netwatch.Agent;
+import io.github.netgaze.Agent;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;

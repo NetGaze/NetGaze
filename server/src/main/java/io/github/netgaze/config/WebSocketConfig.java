@@ -1,4 +1,4 @@
-package io.github.amithkoujalgi.netwatch.config;
+package io.github.netgaze.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

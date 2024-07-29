@@ -1,4 +1,4 @@
-package io.github.amithkoujalgi.netwatch.models.graph;
+package io.github.netgaze.models.graph;
 
 import java.util.HashMap;
 import java.util.Map;

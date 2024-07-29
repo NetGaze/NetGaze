@@ -1,5 +1,6 @@
-package io.github.amithkoujalgi.netwatch.models.graph;
+package io.github.netgaze.models.graph;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -11,8 +12,9 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GraphNodeData {
+public class Graph {
 
-  private String id;
-  private String parent;
+  private List<GraphNode> nodes;
+  private List<GraphEdge> edges;
+
 }

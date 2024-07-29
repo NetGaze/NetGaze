@@ -1,4 +1,4 @@
-package io.github.amithkoujalgi.netwatch.client;
+package io.github.netgaze.client;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {

@@ -1,6 +1,6 @@
-package io.github.amithkoujalgi.netwatch.client;
+package io.github.netgaze.client;
 
-import io.github.amithkoujalgi.netwatch.Agent;
+import io.github.netgaze.Agent;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.stomp.StompCommand;
