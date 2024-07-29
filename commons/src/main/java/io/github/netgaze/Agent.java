@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Setter
@@ -17,6 +17,6 @@ public class Agent {
 
   private String name;
   private String host;
-  private Date lastSeenAt;
+  private Instant lastSeenAt;
   private List<Connection> connections = new ArrayList<>();
 }

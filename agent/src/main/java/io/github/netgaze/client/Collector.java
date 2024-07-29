@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
-import java.util.Date;
+import java.time.Instant;
 
 @Slf4j
 @AllArgsConstructor
@@ -25,16 +25,16 @@ public class Collector {
                 boolean status = checkHTTPConnection(
                         String.format("http://%s:%d", connection.getHost(), connection.getPort()));
                 connection.setActive(status);
-                connection.setLastCheckedAt(new Date());
+                connection.setLastCheckedAt(Instant.now()); // Capture the time in UTC
             } else if (connection.getType().equals(ConnectionType.HTTPS)) {
                 boolean status = checkHTTPSConnection(
                         String.format("https://%s:%d", connection.getHost(), connection.getPort()));
                 connection.setActive(status);
-                connection.setLastCheckedAt(new Date());
+                connection.setLastCheckedAt(Instant.now()); // Capture the time in UTC
             } else if (connection.getType().equals(ConnectionType.TCP)) {
                 boolean status = checkTCPConnection(connection.getHost(), connection.getPort());
                 connection.setActive(status);
-                connection.setLastCheckedAt(new Date());
+                connection.setLastCheckedAt(Instant.now()); // Capture the time in UTC
             }
         }
     }
@@ -48,11 +48,10 @@ public class Collector {
             connection.setConnectTimeout(5000);
             int responseCode = connection.getResponseCode();
             boolean result = responseCode == HttpURLConnection.HTTP_OK;
-            log.info(
-                    "HTTP connection to " + urlStr + " is " + (result ? "active" : "inactive"));
+            log.info("HTTP connection to {} is {}", urlStr, result ? "active" : "inactive");
             return result;
         } catch (IOException e) {
-            log.error("Error checking HTTP connection: " + e.getMessage());
+            log.error("Error checking HTTP connection: {}", e.getMessage());
             return false;
         }
     }
@@ -66,11 +65,10 @@ public class Collector {
             connection.setConnectTimeout(5000);
             int responseCode = connection.getResponseCode();
             boolean result = responseCode == HttpURLConnection.HTTP_OK;
-            log.info(
-                    "HTTPS connection to " + urlStr + " is " + (result ? "active" : "inactive"));
+            log.info("HTTPS connection to {} is {}", urlStr, result ? "active" : "inactive");
             return result;
         } catch (IOException e) {
-            log.error("Error checking HTTPS connection: " + e.getMessage());
+            log.error("Error checking HTTPS connection: {}", e.getMessage());
             return false;
         }
     }
@@ -79,11 +77,10 @@ public class Collector {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(host, port), 1000); // Timeout in milliseconds
             boolean result = socket.isConnected();
-            log.info(
-                    "TCP connection to " + host + ":" + port + " is " + (result ? "active" : "inactive"));
+            log.info("TCP connection to {}:{} is {}", host, port, result ? "active" : "inactive");
             return result;
         } catch (IOException e) {
-            log.error("Error checking TCP connection: " + e.getMessage());
+            log.error("Error checking TCP connection: {}", e.getMessage());
             return false;
         }
     }

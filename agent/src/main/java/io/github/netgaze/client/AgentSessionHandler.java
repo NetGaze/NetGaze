@@ -1,6 +1,8 @@
 package io.github.netgaze.client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.github.netgaze.Agent;
+import io.github.netgaze.util.ObjectMapperProvider;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.stomp.StompCommand;
@@ -20,6 +22,7 @@ public class AgentSessionHandler extends StompSessionHandlerAdapter {
         this.agent = agent;
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
         log.info("New session established: " + session.getSessionId());
@@ -28,10 +31,10 @@ public class AgentSessionHandler extends StompSessionHandlerAdapter {
             while (!disconnected) {
                 try {
                     collector.gather();
-                    session.send("/app/event-listener", agent);
+                    session.send("/app/event-listener", ObjectMapperProvider.getObjectMapper().writeValueAsString(agent));
                     log.info("Published event to server");
-                } catch (IllegalStateException e) {
-                    log.info("Error: " + e.getMessage());
+                } catch (IllegalStateException | JsonProcessingException e) {
+                    log.info("Error: {}", e.getMessage());
                     break;
                 }
                 try {
@@ -58,3 +61,4 @@ public class AgentSessionHandler extends StompSessionHandlerAdapter {
         disconnected = true;
     }
 }
+

@@ -11,7 +11,7 @@ import io.github.netgaze.repository.ConnectionRepository;
 import io.github.netgaze.service.AgentService;
 import org.springframework.stereotype.Service;
 
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,28 +50,22 @@ public class AgentServiceImpl implements AgentService {
                 connectionEntity.setPort(connection.getPort());
                 connectionEntity.setConnectionType(String.valueOf(connection.getType()));
                 connectionEntity.setDescription(connection.getDescription());
-                connectionEntity.setIsActive(connection.isActive());
-                connectionEntity.setLastCheckedAt(connection.getLastCheckedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-                connectionRepository.save(connectionEntity);
             } else {
                 connectionEntity = connectionEntities.get(0);
-                connectionEntity.setIsActive(connection.isActive());
-                connectionEntity.setLastCheckedAt(connection.getLastCheckedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-                connectionRepository.save(connectionEntity);
             }
+            connectionEntity.setIsActive(connection.isActive());
+            connectionEntity.setLastCheckedAt(connection.getLastCheckedAt().atZone(ZoneOffset.UTC).toLocalDateTime());
+            connectionRepository.save(connectionEntity);
             List<AgentConnectionEntity> agentConnectionEntities = agentConnectionRepository.findByAgent_IdAndConnection_Id(agentEntity.getId(), connectionEntity.getId());
             AgentConnectionEntity agentConnectionEntity = null;
             if (agentConnectionEntities.isEmpty()) {
                 agentConnectionEntity = new AgentConnectionEntity();
-                agentConnectionEntity.setAgent(agentEntity);
-                agentConnectionEntity.setConnection(connectionEntity);
-                agentConnectionRepository.save(agentConnectionEntity);
             } else {
                 agentConnectionEntity = agentConnectionEntities.get(0);
-                agentConnectionEntity.setAgent(agentEntity);
-                agentConnectionEntity.setConnection(connectionEntity);
-                agentConnectionRepository.save(agentConnectionEntity);
             }
+            agentConnectionEntity.setAgent(agentEntity);
+            agentConnectionEntity.setConnection(connectionEntity);
+            agentConnectionRepository.save(agentConnectionEntity);
         }
     }
 

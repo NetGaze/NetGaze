@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.Instant;
 
 @Setter
 @Data
@@ -19,5 +19,5 @@ public class Connection {
     private String host;
     private int port;
     private boolean active;
-    private Date lastCheckedAt;
+    private Instant lastCheckedAt;
 }

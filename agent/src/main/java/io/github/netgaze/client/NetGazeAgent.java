@@ -3,12 +3,13 @@ package io.github.netgaze.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import io.github.netgaze.Agent;
-import java.io.File;
-import java.io.IOException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.File;
+import java.io.IOException;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
