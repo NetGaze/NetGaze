@@ -7,11 +7,9 @@
     <groupId>io.github.netgaze</groupId>
     <artifactId>netgaze</artifactId>
     <version>netgaze-revision</version>
-    <description>An real-time network observability platform designed for microservices architectures,
-        providing
-        real-time monitoring and visualization of network connectivity. It enables identification of
-        failure points,
-        network issues, and service dependencies.
+    <description>A simple, lightweight network observability platform designed for microservices architectures,
+        providing real-time monitoring and visualization of network connectivity. It enables identification of
+        failure points, network issues, and service dependencies.
     </description>
     <packaging>pom</packaging>
 

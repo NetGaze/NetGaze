@@ -6,11 +6,8 @@
 
     <artifactId>netgaze-agent</artifactId>
     <version>netgaze-revision</version>
-    <description>An real-time network observability platform designed for microservices architectures,
-        providing
-        real-time monitoring and visualization of network connectivity. It enables identification of
-        failure points,
-        network issues, and service dependencies.
+    <description>A lightweight agent that collects connectivity information from configured endpoints and reports it to
+        the NetWatch server.
     </description>
 
     <parent>

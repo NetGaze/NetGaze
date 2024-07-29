@@ -7,6 +7,8 @@ logging:
     level: '%5p [${spring.application.name:}]'
 server:
   port: 8080
+application:
+  version: netgaze-revision
 spring:
   application:
     name: netgaze-server

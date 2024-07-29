@@ -1,6 +1,8 @@
-package io.github.netgaze.client;
+package io.github.netgaze.test;
 
-public class Main {
+import io.github.netgaze.client.NetGazeAgent;
+
+public class SampleAgent {
     public static void main(String[] args) throws InterruptedException {
         NetGazeAgent netGazeAgent = new NetGazeAgent(
                 "localhost",

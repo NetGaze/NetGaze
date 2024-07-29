@@ -10,7 +10,7 @@ public class NotifierThread extends Thread {
 
   private final String host;
   private final int port;
-  private Agent agent;
+  private final Agent agent;
 
   public NotifierThread(String host, int port, Agent agent) {
     this.host = host;
