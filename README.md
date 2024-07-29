@@ -6,10 +6,9 @@
 
 ![Java](https://img.shields.io/badge/Java-17_+-green.svg?style=just-the-message&labelColor=gray)
 
-NetGaze is a Java-based library/agent designed for server-side network observability for
-microservices. It provides real-time
-monitoring and visualization of network connectivity, enabling you to identify and address issues
-proactively.
+NetGaze is a network observability platform designed for server-side network observability for
+microservices. It provides real-time monitoring and visualization of network connectivity, enabling you to identify
+failure points, network issues, and service dependencies.
 
 **NOTE**: This project is a work in progress.
 
@@ -17,24 +16,41 @@ proactively.
 
 ```mermaid
 flowchart LR
-    cfg["Config"]
-    lib["NetGaze Agent"]
-    svc1["Your Service 1"]
-    svc2["Your Service 2"]
-    lib -. reachability check .-> svc1
-    lib -. reachability check .-> svc2
-    lib -. Reports to .-> listener
+    db["Postgres DB"]
+    cfg1["Config"]
+    cfg2["Config"]
+    lib1["NetGaze Agent"]
+    lib2["Standalone NetGaze Agent"]
+    svc1["Some Service 1"]
+    svc2["Some Service 2"]
+    svc3["Some Service 3"]
+    svc4["Some Service 4"]
+    lib1 -. reachability check .-> svc1
+    lib1 -. reachability check .-> svc2
+    lib1 -- Reports to --> listener
+    lib2 -. reachability check .-> svc3
+    lib2 -. reachability check .-> svc4
+    lib2 -- Reports to --> listener
 
     subgraph app["Your Java App"]
-        lib
+        lib1
+    end
+    subgraph sa_agent["Host/Instance"]
+        lib2
+        cfg2 --> lib2
     end
     subgraph server["NetGaze Server"]
-        ui["UI Server"]
-        rest["REST API"]
         listener["Event Listener"]
+        rest["REST API"]
     end
 
-    cfg --> lib
+    subgraph grafana["Grafana"]
+        dash["NetGaze Dashboard"]
+    end
+
+    cfg1 --> lib1
+    server --> db
+    db -- Poll agents --> dash
 ```
 
 ## Features
@@ -64,7 +80,7 @@ java \
 ```shell
 docker run \
   -p 8080:8080 \
-  ghcr.io/amithkoujalgi/netgaze:0.0.1
+  ghcr.io/netgaze/netgaze:0.0.1
 ```
 
 ##### Use an external config file
@@ -75,11 +91,11 @@ Use
 docker run \
   -p 8080:8080 \
   -v /path/to/your/config.yaml:/app/config.yaml
-  ghcr.io/amithkoujalgi/netgaze:0.0.1
+  ghcr.io/netgaze/netgaze:0.0.1
 ```
 
 Refer to the
-sample [config.yaml](https://github.com/amithkoujalgi/NetGaze/blob/main/server/src/main/resources/application.yaml).
+sample [config.yaml](https://github.com/NetGaze/blob/main/server/src/main/resources/application.yaml).
 
 After running the above command:
 
@@ -109,7 +125,7 @@ To use NetGaze in your Java application, follow these steps:
 ```xml
 
 <dependency>
-    <groupId>io.github.amithkoujalgi</groupId>
+    <groupId>io.github.netgaze</groupId>
     <artifactId>netgaze-agent</artifactId>
     <version>0.0.1</version>
 </dependency>
@@ -123,7 +139,7 @@ To use NetGaze in your Java application, follow these steps:
     <repository>
         <id>github</id>
         <name>GitHub Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/amithkoujalgi/NetGaze</url>
+        <url>https://maven.pkg.github.com/NetGaze</url>
         <releases>
             <enabled>true</enabled>
         </releases>
@@ -173,7 +189,7 @@ connections:
 5. Configure NetGaze Agent in your Java application:
 
 ```java
-import io.github.amithkoujalgi.netgaze.client.NetGazeAgent;
+import io.github.netgaze.client.NetGazeAgent;
 
 import java.util.Collections;
 
@@ -202,7 +218,19 @@ the master.
 
 **This capability is TBD.**
 
-### Build
+### Visualize
+
+Visualize in Grafana
+
+http://localhost:3000/dashboards
+
+<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/dash.png" alt="">
+
+<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/conn-preview.png" alt="">
+
+### Development
+
+#### Build
 
 ```shell
 mvn clean install
@@ -214,20 +242,10 @@ your machine and application.
 You can visualize this data using the NetGaze dashboard to identify any failure points or network
 connectivity issues.
 
-### Visualize
-
-Visualize in Grafana
-
-http://localhost:3000/dashboards
-
-<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/dash.png" alt="">
-
-<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/conn-preview.png" alt="">
-
 ## Todo
 
 - [ ] Python agent
-- [ ] Threaded connection watcher - `io.github.amithkoujalgi.netgaze.client.Collector`
+- [ ] Threaded connection watcher - `io.github.netgaze.client.Collector`
 - [ ] Docker container for NetGaze server
 - [ ] UI improvements
 - [ ] Docs setup with Docusaurus

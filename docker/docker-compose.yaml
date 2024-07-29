@@ -43,7 +43,6 @@ services:
     networks:
       - netgaze-network
 
-
   grafana:
     image: grafana/grafana:main-ubuntu
     environment:

@@ -8,4 +8,4 @@ RUN cd /app && mvn clean install
 
 RUN cp /app/server/src/main/resources/application.yaml /app/config.yaml
 
-CMD ["java", "-jar", "/app/server/target/netwatch-server-netwatch-revision.jar", "--spring.config.location=/app/config.yaml"]
+CMD ["java", "-jar", "/app/server/target/netgaze-server-netgaze-revision.jar", "--spring.config.location=/app/config.yaml"]

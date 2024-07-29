@@ -28,7 +28,7 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "netwatch-revision"
+          find: "netgaze-revision"
           replace: ${{ github.ref_name }}
           regex: false
 
@@ -36,6 +36,6 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml --file pom.xml
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml --file pom.xml -pl agent,server -am
         env:
           GITHUB_TOKEN: ${{ github.token }}
