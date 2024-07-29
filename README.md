@@ -4,12 +4,14 @@
 <img width="150px" src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/logo.jpeg" alt=""/>
 </p>
 
-![Java](https://img.shields.io/badge/Java-17_+-green.svg?style=just-the-message&labelColor=gray)
+<p align="center">
+  <img alt="Java Badge" src="https://img.shields.io/badge/Java-17%2B-orange?style=for-the-badge">
+  <a href="https://hub.docker.com/repository/docker/amithkoujalgi/netgaze-server/general" target="_blank"><img src="https://img.shields.io/docker/pulls/amithkoujalgi/netgaze-server?style=for-the-badge&link=https%3A%2F%2Fhub.docker.com%2Fr%2Famithkoujalgi%2Fnetgaze-server"/></a>
+</p>
 
-NetGaze is a Java-based library/agent designed for server-side network observability for
-microservices. It provides real-time
-monitoring and visualization of network connectivity, enabling you to identify and address issues
-proactively.
+NetGaze is a network observability platform designed for server-side network observability for
+microservices. It provides real-time monitoring and visualization of network connectivity, enabling you to identify
+failure points, network issues, and service dependencies.
 
 **NOTE**: This project is a work in progress.
 
@@ -17,24 +19,41 @@ proactively.
 
 ```mermaid
 flowchart LR
-    cfg["Config"]
-    lib["NetGaze Agent"]
-    svc1["Your Service 1"]
-    svc2["Your Service 2"]
-    lib -. reachability check .-> svc1
-    lib -. reachability check .-> svc2
-    lib -. Reports to .-> listener
+    db["Postgres DB"]
+    cfg1["Config"]
+    cfg2["Config"]
+    lib1["NetGaze Agent"]
+    lib2["Standalone NetGaze Agent"]
+    svc1["Some Service 1"]
+    svc2["Some Service 2"]
+    svc3["Some Service 3"]
+    svc4["Some Service 4"]
+    lib1 -. reachability check .-> svc1
+    lib1 -. reachability check .-> svc2
+    lib1 -- Reports to --> listener
+    lib2 -. reachability check .-> svc3
+    lib2 -. reachability check .-> svc4
+    lib2 -- Reports to --> listener
 
     subgraph app["Your Java App"]
-        lib
+        lib1
+    end
+    subgraph sa_agent["Host/Instance"]
+        lib2
+        cfg2 --> lib2
     end
     subgraph server["NetGaze Server"]
-        ui["UI Server"]
-        rest["REST API"]
         listener["Event Listener"]
+        rest["REST API"]
     end
 
-    cfg --> lib
+    subgraph grafana["Grafana"]
+        dash["NetGaze Dashboard"]
+    end
+
+    cfg1 --> lib1
+    server --> db
+    db -- Poll agents --> dash
 ```
 
 ## Features
@@ -61,25 +80,67 @@ java \
 
 ##### Using default config
 
+[//]: # (From DockerHub)
+
 ```shell
 docker run \
   -p 8080:8080 \
-  ghcr.io/netgaze/netgaze:0.0.1
+  amithkoujalgi/netgaze-server
 ```
+
+This uses default embedded-H2 database as backend. To use an external Postgres database as backend, run the following:
+
+```shell
+docker run \
+  -p 8080:8080 \
+  -e DB_DRIVER=org.postgresql.Driver \
+  -e DB_USERNAME=root \
+  -e DB_PASSWORD=root \
+  -e DB_URL=jdbc:postgresql://localhost:5432/netgaze \
+  amithkoujalgi/netgaze-server
+```
+
+[//]: # (From GHCR)
+
+[//]: # ()
+[//]: # (```shell)
+
+[//]: # (docker run \)
+
+[//]: # (  -p 8080:8080 \)
+
+[//]: # (  ghcr.io/netgaze/netgaze:0.0.1)
+
+[//]: # (```)
 
 ##### Use an external config file
 
-Use
+[//]: # (From DockerHub)
 
 ```shell
 docker run \
   -p 8080:8080 \
-  -v /path/to/your/config.yaml:/app/config.yaml
-  ghcr.io/netgaze/netgaze:0.0.1
+  -v /path/to/your/config.yaml:/app/config.yaml \
+  amithkoujalgi/netgaze-server
 ```
 
+[//]: # (From GHCR)
+
+[//]: # ()
+[//]: # (```shell)
+
+[//]: # (docker run \)
+
+[//]: # (  -p 8080:8080 \)
+
+[//]: # (  -v /path/to/your/config.yaml:/app/config.yaml \)
+
+[//]: # (  ghcr.io/netgaze/netgaze:0.0.1)
+
+[//]: # (```)
+
 Refer to the
-sample [config.yaml](https://github.com/NetGaze/blob/main/server/src/main/resources/application.yaml).
+sample [config.yaml](https://github.com/NetGaze/NetGaze/blob/main/server/src/main/resources/application.yaml).
 
 After running the above command:
 
@@ -91,10 +152,10 @@ After running the above command:
 Verify if the event listener port is accessible.
 
 ```shell
-telnet localhost 8990
+telnet localhost 8080
 ```
 
-### Client
+### Configure a custom Client
 
 #### Case 1: Using it in Java App
 
@@ -202,7 +263,19 @@ the master.
 
 **This capability is TBD.**
 
-### Build
+### Visualize
+
+Visualize in Grafana
+
+http://localhost:3000/dashboards
+
+<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/dash.png" alt="">
+
+<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/conn-preview.png" alt="">
+
+### Development
+
+#### Build
 
 ```shell
 mvn clean install
@@ -214,21 +287,11 @@ your machine and application.
 You can visualize this data using the NetGaze dashboard to identify any failure points or network
 connectivity issues.
 
-### Visualize
-
-Visualize in Grafana
-
-http://localhost:3000/dashboards
-
-<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/dash.png" alt="">
-
-<img src="https://raw.githubusercontent.com/NetGaze/NetGaze/main/images/conn-preview.png" alt="">
-
 ## Todo
 
 - [ ] Python agent
 - [ ] Threaded connection watcher - `io.github.netgaze.client.Collector`
-- [ ] Docker container for NetGaze server
+- [ ] Docker Image for NetGaze server: Minify
 - [ ] UI improvements
 - [ ] Docs setup with Docusaurus
 
