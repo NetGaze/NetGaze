@@ -22,10 +22,10 @@ flowchart LR
   cfg2["Config"]
   lib1["NetGaze Agent"]
   lib2["Standalone NetGaze Agent"]
-  svc1["Your Service 1"]
-  svc2["Your Service 2"]
-  svc3["Your Service 3"]
-  svc4["Your Service 4"]
+  svc1["Some Service 1"]
+  svc2["Some Service 2"]
+  svc3["Some Service 3"]
+  svc4["Some Service 4"]
   lib1 -. reachability check .-> svc1
   lib1 -. reachability check .-> svc2
   lib1 -- Reports to --> listener
