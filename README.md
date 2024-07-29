@@ -41,8 +41,8 @@ flowchart LR
     cfg2 --> lib2
   end
   subgraph server["NetGaze Server"]
-    rest["REST API"]
     listener["Event Listener"]
+    rest["REST API"]
   end
 
   subgraph grafana["Grafana"]
