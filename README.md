@@ -6,10 +6,9 @@
 
 ![Java](https://img.shields.io/badge/Java-17_+-green.svg?style=just-the-message&labelColor=gray)
 
-NetGaze is a Java-based library/agent designed for server-side network observability for
-microservices. It provides real-time
-monitoring and visualization of network connectivity, enabling you to identify and address issues
-proactively.
+NetGaze is a network observability platform designed for server-side network observability for
+microservices. It provides real-time monitoring and visualization of network connectivity, enabling you to identify
+failure points, network issues, and service dependencies.
 
 **NOTE**: This project is a work in progress.
 
@@ -17,41 +16,41 @@ proactively.
 
 ```mermaid
 flowchart LR
-  db["Postgres DB"]
-  cfg1["Config"]
-  cfg2["Config"]
-  lib1["NetGaze Agent"]
-  lib2["Standalone NetGaze Agent"]
-  svc1["Some Service 1"]
-  svc2["Some Service 2"]
-  svc3["Some Service 3"]
-  svc4["Some Service 4"]
-  lib1 -. reachability check .-> svc1
-  lib1 -. reachability check .-> svc2
-  lib1 -- Reports to --> listener
-  lib2 -. reachability check .-> svc3
-  lib2 -. reachability check .-> svc4
-  lib2 -- Reports to --> listener
+    db["Postgres DB"]
+    cfg1["Config"]
+    cfg2["Config"]
+    lib1["NetGaze Agent"]
+    lib2["Standalone NetGaze Agent"]
+    svc1["Some Service 1"]
+    svc2["Some Service 2"]
+    svc3["Some Service 3"]
+    svc4["Some Service 4"]
+    lib1 -. reachability check .-> svc1
+    lib1 -. reachability check .-> svc2
+    lib1 -- Reports to --> listener
+    lib2 -. reachability check .-> svc3
+    lib2 -. reachability check .-> svc4
+    lib2 -- Reports to --> listener
 
-  subgraph app["Your Java App"]
-    lib1
-  end
-  subgraph sa_agent["Host/Instance"]
-    lib2
-    cfg2 --> lib2
-  end
-  subgraph server["NetGaze Server"]
-    listener["Event Listener"]
-    rest["REST API"]
-  end
+    subgraph app["Your Java App"]
+        lib1
+    end
+    subgraph sa_agent["Host/Instance"]
+        lib2
+        cfg2 --> lib2
+    end
+    subgraph server["NetGaze Server"]
+        listener["Event Listener"]
+        rest["REST API"]
+    end
 
-  subgraph grafana["Grafana"]
-    dash["NetGaze Dashboard"]
-  end
+    subgraph grafana["Grafana"]
+        dash["NetGaze Dashboard"]
+    end
 
-  cfg1 --> lib1
-  server --> db
-  db -- Poll agents --> dash
+    cfg1 --> lib1
+    server --> db
+    db -- Poll agents --> dash
 ```
 
 ## Features
