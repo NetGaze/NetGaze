@@ -1,11 +1,11 @@
 package io.github.netgaze;
 
-public enum ConnectionType {
+public enum Scheme {
     HTTP, HTTPS, TCP;
 
-    public static ConnectionType fromString(String connectionType) {
+    public static Scheme fromString(String connectionType) {
         try {
-            return ConnectionType.valueOf(connectionType.toUpperCase());
+            return Scheme.valueOf(connectionType.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Unknown connection type: " + connectionType, e);
         }

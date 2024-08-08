@@ -1,23 +1,32 @@
 package io.github.netgaze;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
 
-import java.time.Instant;
+import java.time.Duration;
 
-@Setter
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Connection {
 
+    @NonNull
     private String name;
+
+    @NonNull
     private String description;
-    private ConnectionType type;
+
+    @NonNull
+    private Scheme scheme;
+
+    @NonNull
     private String host;
+
     private int port;
-    private boolean active;
-    private Instant lastCheckedAt;
+
+    @NonNull
+    private Duration pollInterval = Duration.ofSeconds(5);
+
+    private Duration timeout; // Timeout as Duration
+
 }

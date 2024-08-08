@@ -41,14 +41,14 @@ public class AgentServiceImpl implements AgentService {
             agentEntity = agents.get(0);
         }
         for (Connection connection : agent.getConnections()) {
-            List<ConnectionEntity> connectionEntities = connectionRepository.findByNameAndHostAndPortAndConnectionType(connection.getName(), connection.getHost(), connection.getPort(), connection.getType().name());
+            List<ConnectionEntity> connectionEntities = connectionRepository.findByNameAndHostAndPortAndConnectionType(connection.getName(), connection.getHost(), connection.getPort(), connection.getScheme().name());
             ConnectionEntity connectionEntity = null;
             if (connectionEntities.isEmpty()) {
                 connectionEntity = new ConnectionEntity();
                 connectionEntity.setName(connection.getName());
                 connectionEntity.setHost(connection.getHost());
                 connectionEntity.setPort(connection.getPort());
-                connectionEntity.setConnectionType(String.valueOf(connection.getType()));
+                connectionEntity.setConnectionType(String.valueOf(connection.getScheme()));
                 connectionEntity.setDescription(connection.getDescription());
             } else {
                 connectionEntity = connectionEntities.get(0);

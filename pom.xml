@@ -34,6 +34,7 @@
             <url>https://maven.pkg.github.com/NetGaze/NetGaze</url>
         </repository>
     </distributionManagement>
+
     <repositories>
         <repository>
             <id>github</id>
