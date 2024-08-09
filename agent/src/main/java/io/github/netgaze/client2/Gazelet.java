@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class Gazelet {
 
     @NonNull
+    @Getter
     private final Connection connection;
 
     private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(30);
@@ -33,35 +34,62 @@ public class Gazelet {
 
     private final GazeHistoryManager historyManager = new GazeHistoryManager();
 
-    private final ScheduledExecutorService executorService;
+    private ScheduledExecutorService executorService;
 
     public Gazelet(@NonNull Connection connection) {
         this.connection = connection;
         if (this.connection.getTimeout() == null) {
             this.connection.setTimeout(DEFAULT_TIMEOUT);
         }
-        this.executorService = Executors.newSingleThreadScheduledExecutor();
     }
 
-    public void start() {
-        long initialDelay = 0;
+    public synchronized void start() {
+        long initialDelay = connection.getPollInterval().toMillis();
         long period = connection.getPollInterval().toMillis();
+        this.isShutdownRequested = false;
+
+        if (executorService == null || executorService.isShutdown()) {
+            this.executorService = Executors.newSingleThreadScheduledExecutor();
+        }
         executorService.scheduleAtFixedRate(this::checkConnection, initialDelay, period, TimeUnit.MILLISECONDS);
+
+    }
+
+    public void requestShutdown() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        this.isShutdownRequested = true;
+        shutdown();
+    }
+
+    private void shutdown() {
+        executorService.shutdown();
+        try {
+            if (!executorService.awaitTermination(this.connection.getPollInterval().toSeconds(), TimeUnit.SECONDS)) {
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow();
+            Thread.currentThread().interrupt();
+            e.printStackTrace();
+        }
     }
 
     public Deque<GazeStat> getGazeHistory() {
         return historyManager.getGazeHistory();
     }
 
-    private void checkConnection() {
-        if (isShutdownRequested) {
-            shutdown();
+    private synchronized void checkConnection() {
+        if (this.isShutdownRequested) {
+            this.shutdown();
             return;
         }
 
         String endpoint = "";
         try {
-            Instant startTime = Instant.now();
             GazeStat stat = null;
             if (connection.getScheme().equals(Scheme.HTTP)) {
                 endpoint = String.format("http://%s:%d", connection.getHost(), connection.getPort());
@@ -74,19 +102,15 @@ public class Gazelet {
                 stat = checkTCPConnection(connection.getHost(), connection.getPort());
             }
 
-            Instant endTime = Instant.now();
-            Duration responseTime = Duration.between(startTime, endTime);
-
-            int statusCode = -1;
             log.info("Checked endpoint '{}': Status Code = {}, Response Time = {} ms, Status = {}",
                     endpoint,
-                    statusCode,
-                    responseTime.toMillis(),
+                    stat.getStatusCode(),
+                    stat.getResponseTime() == null ? -1 : stat.getResponseTime().toMillis(),
                     stat.isActive() ? "active" : "inactive"
             );
             historyManager.addStat(stat);
         } catch (Exception e) {
-            log.error("Error checking connection for '{}': {}", endpoint, e.getMessage(), e);
+            log.error("Error checking connection for '{}'", endpoint, e);
         }
     }
 
@@ -115,7 +139,7 @@ public class Gazelet {
         } catch (IOException e) {
             stat.setErrorStackTrace(getStackTrace(e));
             stat.setActive(false);
-            log.error("Error checking HTTP connection to '{}': {}", urlStr, e.getMessage(), e);
+            log.error("Error checking HTTP connection to '{}'", urlStr, e);
         }
         return stat;
     }
@@ -144,7 +168,7 @@ public class Gazelet {
         } catch (IOException e) {
             stat.setErrorStackTrace(getStackTrace(e));
             stat.setActive(false);
-            log.error("Error checking HTTPS connection to '{}': {}", urlStr, e.getMessage(), e);
+            log.error("Error checking HTTPS connection to '{}'", urlStr, e);
         }
         return stat;
     }
@@ -171,7 +195,7 @@ public class Gazelet {
         } catch (IOException e) {
             stat.setErrorStackTrace(getStackTrace(e));
             stat.setActive(false);
-            log.error("Error checking TCP connection to '{}:{}': {}", host, port, e.getMessage(), e);
+            log.error("Error checking TCP connection to '{}:{}'", host, port, e);
         }
         return stat;
     }
@@ -184,17 +208,5 @@ public class Gazelet {
         return sw.toString();
     }
 
-    public void shutdown() {
-        isShutdownRequested = true;
-        executorService.shutdown();
-        try {
-            if (!executorService.awaitTermination(30, TimeUnit.SECONDS)) {
-                executorService.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            executorService.shutdownNow();
-            Thread.currentThread().interrupt();
-        }
-    }
 }
 

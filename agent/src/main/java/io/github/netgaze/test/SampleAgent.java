@@ -2,6 +2,7 @@ package io.github.netgaze.test;
 
 import io.github.netgaze.Connection;
 import io.github.netgaze.Scheme;
+import io.github.netgaze.client2.GazeStat;
 import io.github.netgaze.client2.Gazer;
 
 import java.util.Collections;
@@ -28,6 +29,11 @@ public class SampleAgent {
 
         Gazer g = new Gazer(Collections.singletonList(c));
         g.start();
+        Thread.sleep(12000);
+        System.out.println("Count: "+ g.getGazeHistory(c).size());
+        for (GazeStat gz: g.getGazeHistory(c)){
+            System.out.println(gz.getStatusCode());
+        }
         g.stop();
     }
 }
