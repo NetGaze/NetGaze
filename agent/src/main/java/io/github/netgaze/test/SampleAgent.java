@@ -27,8 +27,10 @@ public class SampleAgent {
 
 
         Gazer g = new Gazer(Collections.singletonList(c));
+//        g.start();
         g.start();
-        Thread.sleep(12000);
+//        Thread.sleep(12000);
+        g.stop();
         g.stop();
     }
 }

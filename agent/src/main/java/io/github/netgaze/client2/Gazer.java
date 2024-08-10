@@ -1,6 +1,7 @@
 package io.github.netgaze.client2;
 
 import io.github.netgaze.Connection;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class Gazer {
-    private static final int THREAD_POOL_SIZE = 3;
+    @Setter
+    private static int threadPoolSize = 3;
 
     private final List<Connection> connections;
     private ExecutorService executor;
@@ -26,7 +28,12 @@ public class Gazer {
 
 
     public void start() {
-        executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+        if (executor != null && !executor.isShutdown()) {
+            log.info("Gazer has already started.");
+            return;
+        }
+        log.info("Starting Gazer...");
+        executor = Executors.newFixedThreadPool(threadPoolSize);
         try {
             for (Connection connection : connections) {
                 Gazelet gazelet = new Gazelet(connection);
@@ -55,6 +62,10 @@ public class Gazer {
     }
 
     public void stop() throws InterruptedException {
+        if (executor == null || executor.isShutdown() || executor.isTerminated()) {
+            log.info("Could not stop Gazer since it isn't active.");
+            return;
+        }
         log.info("Stopping all Gazelets...");
         for (Gazelet gazelet : gazelets) {
             gazelet.requestShutdown();
