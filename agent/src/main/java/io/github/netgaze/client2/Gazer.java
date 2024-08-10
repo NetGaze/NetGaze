@@ -14,7 +14,9 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class Gazer {
     @Setter
-    private static int threadPoolSize = 3;
+    private int threadPoolSize = 3;
+    @Setter
+    private int maxHistorySize = 100;
 
     private final List<Connection> connections;
     private ExecutorService executor;
@@ -36,7 +38,7 @@ public class Gazer {
         executor = Executors.newFixedThreadPool(threadPoolSize);
         try {
             for (Connection connection : connections) {
-                Gazelet gazelet = new Gazelet(connection);
+                Gazelet gazelet = new Gazelet(connection, maxHistorySize);
                 executor.submit(() -> {
                     try {
                         gazelet.start();

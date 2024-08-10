@@ -32,15 +32,16 @@ public class Gazelet {
     @Getter
     private boolean isShutdownRequested = false;
 
-    private final GazeHistoryManager historyManager = new GazeHistoryManager();
+    private final GazeHistoryManager historyManager;
 
     private ScheduledExecutorService executorService;
 
-    public Gazelet(@NonNull Connection connection) {
+    public Gazelet(@NonNull Connection connection, int maxHistory) {
         this.connection = connection;
         if (this.connection.getTimeout() == null) {
             this.connection.setTimeout(DEFAULT_TIMEOUT);
         }
+        this.historyManager = new GazeHistoryManager(maxHistory);
     }
 
     public synchronized void start() {
@@ -101,6 +102,7 @@ public class Gazelet {
                 endpoint = String.format("%s:%d", connection.getHost(), connection.getPort());
                 stat = checkTCPConnection(connection.getHost(), connection.getPort());
             }
+            stat.setTimestamp(Instant.now());
 
             log.info("Checked endpoint '{}': Status Code = {}, Response Time = {} ms, Status = {}",
                     endpoint,
