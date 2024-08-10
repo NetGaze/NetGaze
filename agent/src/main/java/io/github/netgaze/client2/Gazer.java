@@ -4,9 +4,7 @@ import io.github.netgaze.Connection;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -19,15 +17,15 @@ public class Gazer {
     private int maxHistorySize = 100;
 
     private final List<Connection> connections;
+
+    @SuppressWarnings("SpellCheckingInspection")
+    private final List<Gazelet> gazelets = new ArrayList<>();
+
     private ExecutorService executor;
 
     public Gazer(List<Connection> connections) {
         this.connections = connections;
     }
-
-    @SuppressWarnings("SpellCheckingInspection")
-    private final List<Gazelet> gazelets = new ArrayList<>();
-
 
     public void start() {
         if (executor != null && !executor.isShutdown()) {
@@ -54,14 +52,14 @@ public class Gazer {
     }
 
 
-    public Deque<GazeStat> getGazeHistory(Connection connection) {
+    public Map<Connection, Deque<GazeStat>> getGazeHistory() {
+        Map<Connection, Deque<GazeStat>> history = new HashMap<>();
         for (Gazelet gazelet : gazelets) {
-            if (gazelet.getConnection().equals(connection)) {
-                return gazelet.getGazeHistory();
-            }
+            history.put(gazelet.getConnection(), gazelet.getGazeHistory());
         }
-        throw new IllegalStateException("No Gazelet found for connection " + connection);
+        return history;
     }
+
 
     public void stop() throws InterruptedException {
         if (executor == null || executor.isShutdown() || executor.isTerminated()) {
