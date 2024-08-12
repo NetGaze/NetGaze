@@ -22,9 +22,10 @@ public class AgentSessionHandler extends StompSessionHandlerAdapter {
     private final String agentHost;
     private final String agentName;
 
-    public AgentSessionHandler(String agentHost, String agentName) {
+    public AgentSessionHandler(String agentHost, String agentName, Gazer gazer) {
         this.agentHost = agentHost;
         this.agentName = agentName;
+        this.gazer = gazer;
     }
 
     @Override

@@ -27,6 +27,5 @@ public class Connection {
     @NonNull
     private Duration pollInterval = Duration.ofSeconds(5);
 
-    private Duration timeout; // Timeout as Duration
-
+    private Duration timeout = Duration.ofSeconds(10);
 }

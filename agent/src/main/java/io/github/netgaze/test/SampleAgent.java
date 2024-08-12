@@ -2,9 +2,7 @@ package io.github.netgaze.test;
 
 import io.github.netgaze.Connection;
 import io.github.netgaze.Scheme;
-import io.github.netgaze.client2.Gazer;
-
-import java.util.Collections;
+import io.github.netgaze.client2.NetGazeAgent;
 
 public class SampleAgent {
     public static void main(String[] args) throws InterruptedException {
@@ -26,11 +24,14 @@ public class SampleAgent {
         c.setScheme(Scheme.HTTP);
 
 
-        Gazer g = new Gazer(Collections.singletonList(c));
+//        Gazer g = new Gazer(Collections.singletonList(c));
 //        g.start();
-        g.start();
+//        g.start();
 //        Thread.sleep(12000);
-        g.stop();
-        g.stop();
+//        g.stop();
+//        g.stop();
+
+        NetGazeAgent agent = new NetGazeAgent("/Users/amithkoujalgi/NetGaze/agent-config.yaml");
+        agent.start();
     }
 }
