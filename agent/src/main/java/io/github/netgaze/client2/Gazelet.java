@@ -1,7 +1,5 @@
 package io.github.netgaze.client2;
 
-import io.github.netgaze.Connection;
-import io.github.netgaze.Scheme;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

@@ -1,8 +1,8 @@
 package io.github.netgaze.test;
 
-import io.github.netgaze.Connection;
-import io.github.netgaze.Scheme;
+import io.github.netgaze.client2.Connection;
 import io.github.netgaze.client2.NetGazeAgent;
+import io.github.netgaze.client2.Scheme;
 
 public class SampleAgent {
     public static void main(String[] args) throws InterruptedException {

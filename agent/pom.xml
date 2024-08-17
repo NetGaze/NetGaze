@@ -25,11 +25,11 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.github.netgaze</groupId>
-            <artifactId>netgaze-commons</artifactId>
-            <version>netgaze-revision</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.github.netgaze</groupId>-->
+<!--            <artifactId>netgaze-commons</artifactId>-->
+<!--            <version>netgaze-revision</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

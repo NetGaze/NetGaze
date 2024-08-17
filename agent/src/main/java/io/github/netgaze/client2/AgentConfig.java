@@ -1,7 +1,6 @@
 package io.github.netgaze.client2;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.github.netgaze.Connection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

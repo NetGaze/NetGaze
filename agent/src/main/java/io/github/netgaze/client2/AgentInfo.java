@@ -1,6 +1,5 @@
 package io.github.netgaze.client2;
 
-import io.github.netgaze.Connection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,6 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AgentInfo {
-
     private String name;
     private String host;
     private Instant lastSeenAt;

@@ -1,7 +1,6 @@
 build:
 	mvn clean install
 
-
 start-services:
 	docker compose -f ./docker/docker-compose.yaml down -v; \
     docker compose -f ./docker/docker-compose.yaml rm -fsv; \

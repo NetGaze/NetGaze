@@ -1,8 +1,6 @@
 package io.github.netgaze.controllers;
 
-import io.github.netgaze.Agent;
 import io.github.netgaze.service.AgentService;
-import io.github.netgaze.util.ObjectMapperProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
@@ -19,7 +17,8 @@ public class SocketController {
     @MessageMapping("/event-listener")
     public void registerOrUpdateAgent(String agentJson) throws Exception {
         log.info("Received: {}", agentJson);
-        Agent agent = ObjectMapperProvider.getObjectMapper().readValue(agentJson, Agent.class);
-        agentService.addOrUpdateAgent(agent);
+        CAgent agent = ObjectMapperProvider.getObjectMapper().readValue(agentJson, CAgent.class);
+        System.out.println("Collected agent info");
+//        agentService.addOrUpdateAgent(agent);
     }
 }

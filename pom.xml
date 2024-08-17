@@ -122,6 +122,7 @@
         <module>commons</module>
         <module>server</module>
         <module>agent</module>
+        <module>netty-test</module>
     </modules>
 
     <build>
